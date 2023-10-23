@@ -1,0 +1,30 @@
+.pagewrapper {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 25px;
+  /* height: 60%; */
+}
+
+.view {
+  margin-right: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.view span {
+  font-weight: 600;
+}
+
+.pokemonphoto {
+  width: 150px;
+  height: 150px;
+  background: none;
+}
+
+.description {
+  width: 30%;
+}
+
+.description span {
+  font-weight: 600;
+}
