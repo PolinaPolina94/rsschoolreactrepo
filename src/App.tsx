@@ -1,7 +1,9 @@
+import InputSearch from './components/input-search/InputSearch';
+
 function App() {
   return (
     <>
-      <div>Hello, App!</div>
+      <InputSearch />
     </>
   );
 }
