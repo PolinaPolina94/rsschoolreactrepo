@@ -1,28 +1,122 @@
 import { Component } from 'react';
-import classes from './MainPage.module.css';
+// import InputSearch from './components/input-search/InputSearch';
+import { Item, State } from '../../types';
+import ItemOnPage from './ItemOnPage';
 
 class MainPage extends Component {
+  personName = localStorage.getItem('personName');
+
+  state: State = {
+    error: null,
+    isLoaded: false,
+    items: [],
+  };
+  componentDidMount() {
+    if (!this.personName) {
+      fetch(`https://rickandmortyapi.com/api/character/?page=1`)
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            this.setState({
+              isLoaded: true,
+              items: result.results,
+            });
+          }
+          // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
+          // чтобы не перехватывать исключения из ошибок в самих компонентах.
+          // (error) => {
+          //   this.setState({
+          //     isLoaded: true,
+          //     error,
+          //   });
+          // }
+        );
+    } else if (this.personName == null) {
+      fetch(`https://rickandmortyapi.com/api/character/?page=1`)
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            this.setState({
+              isLoaded: true,
+              items: result.results,
+            });
+          }
+          // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
+          // чтобы не перехватывать исключения из ошибок в самих компонентах.
+          // (error) => {
+          //   this.setState({
+          //     isLoaded: true,
+          //     error,
+          //   });
+          // }
+        );
+    } else if (this.personName && this.personName.trim() == '') {
+      fetch(`https://rickandmortyapi.com/api/character/?page=1`)
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            this.setState({
+              // isLoaded: true,
+              items: result.results,
+            });
+          }
+          // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
+          // чтобы не перехватывать исключения из ошибок в самих компонентах.
+          // (error) => {
+          //   this.setState({
+          //     isLoaded: true,
+          //     error,
+          //   });
+          // }
+        );
+    } else if (this.personName) {
+      fetch(`https://rickandmortyapi.com/api/character/?page=1&name=${this.personName}`)
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            this.setState({
+              isLoaded: true,
+              items: result.results,
+            });
+          }
+          // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
+          // чтобы не перехватывать исключения из ошибок в самих компонентах.
+          // (error: Error) => {
+          //   this.setState({
+          //     isLoaded: true,
+          //     error,
+          //     // items: [],
+          //   });
+          //   console.log('ERRRROOOOORRR');
+          // }
+        );
+    }
+    console.log(this.personName);
+  }
   render() {
-    return (
-      <div className={classes.pagewrapper}>
-        <div className={classes.view}>
-          <span> Name of Pokemon </span>
-          <img
-            className={classes.pokemonphoto}
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/1.png"
-            alt="pokemon name"
-          ></img>
-        </div>
-        <div className={classes.description}>
-          <span> Description </span>
-          <div>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure, labore error. Non vitae
-            consequatur, enim neque corporis inventore eaque eum aspernatur sint, laboriosam fugit,
-            repudiandae tempora accusantium voluptatum nobis debitis!
-          </div>
-        </div>
-      </div>
-    );
+    // console.log(this.state.items);
+    const items = this.state.items;
+    if (items) {
+      return (
+        <>
+          {/* <InputSearch /> */}
+          {items.map((el: Item) => (
+            <ItemOnPage
+              key={el.id}
+              name={el.name}
+              // item={el}
+              image={el.image}
+              species={el.species}
+              type={el.type}
+              gender={el.gender}
+              planet={el.origin!.name}
+            />
+          ))}
+        </>
+      );
+    } else {
+      return <div>no such name</div>;
+    }
   }
 }
 
