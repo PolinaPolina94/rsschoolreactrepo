@@ -2,18 +2,11 @@ import { Component } from 'react';
 import classes from './ItemOnPage.module.css';
 import { Item } from '../../types';
 
-// type Item = {
-//   id?: number;
-//   name: string;
-//   img?: string;
-// };
-
 class ItemOnPage extends Component<Item, { planet: string }> {
   constructor(props: Item) {
     super(props);
   }
   render() {
-    console.log(this.props);
     return (
       <div className={classes.pagewrapper}>
         <div className={classes.view}>

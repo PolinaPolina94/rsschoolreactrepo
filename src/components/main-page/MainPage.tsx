@@ -1,5 +1,4 @@
 import { Component } from 'react';
-// import InputSearch from './components/input-search/InputSearch';
 import { Item, State } from '../../types';
 import ItemOnPage from './ItemOnPage';
 
@@ -94,17 +93,14 @@ class MainPage extends Component {
     console.log(this.personName);
   }
   render() {
-    // console.log(this.state.items);
     const items = this.state.items;
     if (items) {
       return (
         <>
-          {/* <InputSearch /> */}
           {items.map((el: Item) => (
             <ItemOnPage
               key={el.id}
               name={el.name}
-              // item={el}
               image={el.image}
               species={el.species}
               type={el.type}
