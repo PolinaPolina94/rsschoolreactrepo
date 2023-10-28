@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { Item, State } from '../../types';
 import ItemOnPage from './ItemOnPage';
+import classes from './ItemOnPage.module.css';
+import Loader from '../loader/Loader';
 
 class MainPage extends Component {
   personName = localStorage.getItem('personName');
@@ -94,7 +96,11 @@ class MainPage extends Component {
   }
   render() {
     const items = this.state.items;
-    if (items) {
+    const loading = this.state.isLoaded;
+    console.log(loading);
+    if (!loading) {
+      return <Loader />;
+    } else if (items) {
       return (
         <>
           {items.map((el: Item) => (
@@ -111,7 +117,7 @@ class MainPage extends Component {
         </>
       );
     } else {
-      return <div>no such name</div>;
+      return <div className={classes.notfound}>no such name</div>;
     }
   }
 }
