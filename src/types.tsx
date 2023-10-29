@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export type Item = {
   id?: number;
   name: string;
@@ -21,3 +23,11 @@ export type State = {
 export type InputValue = {
   value: string;
 };
+
+export interface Props {
+  children?: ReactNode;
+}
+
+export interface HasState {
+  hasError: boolean;
+}

@@ -1,8 +1,8 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import classes from './ItemOnPage.module.css';
 import { Item } from '../../types';
 
-class ItemOnPage extends Component<Item, { planet: string }> {
+class ItemOnPage extends PureComponent<Item, { planet: string }> {
   constructor(props: Item) {
     super(props);
   }

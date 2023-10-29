@@ -1,10 +1,10 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import { Item, State } from '../../types';
 import ItemOnPage from './ItemOnPage';
 import classes from './ItemOnPage.module.css';
 import Loader from '../loader/Loader';
 
-class MainPage extends Component {
+class MainPage extends PureComponent {
   personName = localStorage.getItem('personName');
 
   state: State = {
@@ -16,88 +16,44 @@ class MainPage extends Component {
     if (!this.personName) {
       fetch(`https://rickandmortyapi.com/api/character/?page=1`)
         .then((res) => res.json())
-        .then(
-          (result) => {
-            this.setState({
-              isLoaded: true,
-              items: result.results,
-            });
-          }
-          // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
-          // чтобы не перехватывать исключения из ошибок в самих компонентах.
-          // (error) => {
-          //   this.setState({
-          //     isLoaded: true,
-          //     error,
-          //   });
-          // }
-        );
+        .then((result) => {
+          this.setState({
+            isLoaded: true,
+            items: result.results,
+          });
+        });
     } else if (this.personName == null) {
       fetch(`https://rickandmortyapi.com/api/character/?page=1`)
         .then((res) => res.json())
-        .then(
-          (result) => {
-            this.setState({
-              isLoaded: true,
-              items: result.results,
-            });
-          }
-          // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
-          // чтобы не перехватывать исключения из ошибок в самих компонентах.
-          // (error) => {
-          //   this.setState({
-          //     isLoaded: true,
-          //     error,
-          //   });
-          // }
-        );
+        .then((result) => {
+          this.setState({
+            isLoaded: true,
+            items: result.results,
+          });
+        });
     } else if (this.personName && this.personName.trim() == '') {
       fetch(`https://rickandmortyapi.com/api/character/?page=1`)
         .then((res) => res.json())
-        .then(
-          (result) => {
-            this.setState({
-              // isLoaded: true,
-              items: result.results,
-            });
-          }
-          // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
-          // чтобы не перехватывать исключения из ошибок в самих компонентах.
-          // (error) => {
-          //   this.setState({
-          //     isLoaded: true,
-          //     error,
-          //   });
-          // }
-        );
+        .then((result) => {
+          this.setState({
+            isLoaded: true,
+            items: result.results,
+          });
+        });
     } else if (this.personName) {
       fetch(`https://rickandmortyapi.com/api/character/?page=1&name=${this.personName}`)
         .then((res) => res.json())
-        .then(
-          (result) => {
-            this.setState({
-              isLoaded: true,
-              items: result.results,
-            });
-          }
-          // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
-          // чтобы не перехватывать исключения из ошибок в самих компонентах.
-          // (error: Error) => {
-          //   this.setState({
-          //     isLoaded: true,
-          //     error,
-          //     // items: [],
-          //   });
-          //   console.log('ERRRROOOOORRR');
-          // }
-        );
+        .then((result) => {
+          this.setState({
+            isLoaded: true,
+            items: result.results,
+          });
+        });
     }
-    console.log(this.personName);
   }
   render() {
     const items = this.state.items;
     const loading = this.state.isLoaded;
-    console.log(loading);
     if (!loading) {
       return <Loader />;
     } else if (items) {
@@ -117,7 +73,7 @@ class MainPage extends Component {
         </>
       );
     } else {
-      return <div className={classes.notfound}>no such name</div>;
+      return <div className={classes.notfound}> no such name </div>;
     }
   }
 }

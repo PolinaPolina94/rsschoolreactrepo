@@ -1,8 +1,8 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import classes from './InputSearch.module.css';
 import { InputValue } from '../../types';
 
-class InputSearch extends Component {
+class InputSearch extends PureComponent {
   state: InputValue = {
     value: '',
   };
@@ -15,7 +15,6 @@ class InputSearch extends Component {
   handleFormSubmit = (): void => {
     const name = this.state.value;
     localStorage.setItem('personName', name);
-    console.log('gooood', name);
   };
   render() {
     return (

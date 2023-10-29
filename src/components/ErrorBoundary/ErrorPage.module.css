@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  margin-top: 25px;
+  width: 500px;
+  align-items: center;
+}
+
+h1 {
+  color: #6d14b8;
+}
+.reset,
+.button {
+  border-radius: 20px;
+  background-color: aquamarine;
+  color: blueviolet;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid #69b7eb;
+  width: 80px;
+}
