@@ -2,7 +2,7 @@
   "name": "my-app",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://polinapolina94.github.io/rsschoolreactrepo/react-components",
+  "homepage": "https://polinapolina94.github.io/rsschoolreactrepo/",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
