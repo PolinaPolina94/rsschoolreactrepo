@@ -9,8 +9,10 @@ class App extends Component {
     return (
       <>
         <ErrorBoundary>
-          <ErrorButton />
-          <InputSearch />
+          <header>
+            <ErrorButton />
+            <InputSearch />
+          </header>
           <MainPage />
         </ErrorBoundary>
       </>

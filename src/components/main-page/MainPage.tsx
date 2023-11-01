@@ -58,7 +58,7 @@ class MainPage extends PureComponent {
       return <Loader />;
     } else if (items) {
       return (
-        <>
+        <main>
           {items.map((el: Item) => (
             <ItemOnPage
               key={el.id}
@@ -70,7 +70,7 @@ class MainPage extends PureComponent {
               planet={el.origin!.name}
             />
           ))}
-        </>
+        </main>
       );
     } else {
       return <div className={classes.notfound}> no such name </div>;
