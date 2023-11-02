@@ -15,7 +15,7 @@ export type Item = {
 };
 
 export type State = {
-  error: null;
+  error?: null;
   isLoaded: boolean;
   items: Item[];
 };

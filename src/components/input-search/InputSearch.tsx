@@ -1,39 +1,37 @@
-import { PureComponent } from 'react';
+import { useState } from 'react';
 import classes from './InputSearch.module.css';
 import { InputValue } from '../../types';
 
-class InputSearch extends PureComponent {
-  state: InputValue = {
-    value: '',
+const InputSearch = () => {
+  const [state, setValue] = useState<InputValue | null>(null);
+  // state: InputValue = {
+  //   value: '',
+  // };
+
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const newvalue = event.currentTarget.value.toLowerCase();
+    setValue({ value: newvalue });
   };
 
-  handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value.toLowerCase();
-    this.setState({ value: value });
+  const handleFormSubmit = (): void => {
+    if (state) {
+      const name = state.value.toString();
+      localStorage.setItem('personName', name);
+    } else {
+      localStorage.setItem('personName', '');
+    }
   };
-
-  handleFormSubmit = (): void => {
-    const name = this.state.value;
-    localStorage.setItem('personName', name);
-  };
-  render() {
-    return (
-      <form onSubmit={this.handleFormSubmit}>
-        <div className={classes.inputwrapper}>
-          <input
-            type="text"
-            name="name"
-            placeholder="write here a name"
-            onChange={this.handleChange}
-          />
-          <button className={classes.buttonsearch} type="submit">
-            {' '}
-            Search 🔎{' '}
-          </button>
-        </div>
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={handleFormSubmit}>
+      <div className={classes.inputwrapper}>
+        <input type="text" name="name" placeholder="write here a name" onChange={handleChange} />
+        <button className={classes.buttonsearch} type="submit">
+          {' '}
+          Search 🔎{' '}
+        </button>
+      </div>
+    </form>
+  );
+};
 
 export default InputSearch;

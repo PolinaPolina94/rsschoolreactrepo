@@ -1,59 +1,57 @@
-import { PureComponent } from 'react';
+import { useEffect, useState } from 'react';
 import { Item, State } from '../../types';
 import ItemOnPage from './ItemOnPage';
 import classes from './ItemOnPage.module.css';
 import Loader from '../loader/Loader';
 
-class MainPage extends PureComponent {
-  personName = localStorage.getItem('personName');
+const MainPage = () => {
+  const personName = localStorage.getItem('personName');
 
-  state: State = {
-    error: null,
-    isLoaded: false,
-    items: [],
-  };
-  componentDidMount() {
-    if (!this.personName) {
+  const [state, setState] = useState<State | null>(null);
+
+  useEffect(() => {
+    if (!personName) {
       fetch(`https://rickandmortyapi.com/api/character/?page=1`)
         .then((res) => res.json())
         .then((result) => {
-          this.setState({
+          setState({
             isLoaded: true,
             items: result.results,
           });
         });
-    } else if (this.personName == null) {
+    } else if (personName == null) {
       fetch(`https://rickandmortyapi.com/api/character/?page=1`)
         .then((res) => res.json())
         .then((result) => {
-          this.setState({
+          setState({
             isLoaded: true,
             items: result.results,
           });
         });
-    } else if (this.personName && this.personName.trim() == '') {
+    } else if (personName && personName.trim() == '') {
       fetch(`https://rickandmortyapi.com/api/character/?page=1`)
         .then((res) => res.json())
         .then((result) => {
-          this.setState({
+          setState({
             isLoaded: true,
             items: result.results,
           });
         });
-    } else if (this.personName) {
-      fetch(`https://rickandmortyapi.com/api/character/?page=1&name=${this.personName}`)
+    } else if (personName) {
+      fetch(`https://rickandmortyapi.com/api/character/?page=1&name=${personName}`)
         .then((res) => res.json())
         .then((result) => {
-          this.setState({
+          setState({
             isLoaded: true,
             items: result.results,
           });
         });
     }
-  }
-  render() {
-    const items = this.state.items;
-    const loading = this.state.isLoaded;
+  }, [personName]);
+
+  if (state) {
+    const loading = state.isLoaded;
+    const items = state.items;
     if (!loading) {
       return <Loader />;
     } else if (items) {
@@ -76,6 +74,6 @@ class MainPage extends PureComponent {
       return <div className={classes.notfound}> no such name </div>;
     }
   }
-}
+};
 
 export default MainPage;
