@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 15px;
+    gap: 10px;
+    align-items: center;
+    text-content: center;
+}
+
+a {
+    border: 2px solid #ffd4ac;
+    width:20px;
+    height:20px;
+    border-radius: 50%;
+    text-align: center;
+    background: #fffc8c;
+    color: brown;
+    font-weight: bold;
+}
+
+.item:hover {
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.item:active {
+    opacity: 0.4;
+}
+
+.button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px
+}
+.button:hover {
+    border-bottom: 2px solid white;
+}
+
+a {
+    text-decoration: none;
+}
+
+a.active {
+    opacity: 0.4
+}

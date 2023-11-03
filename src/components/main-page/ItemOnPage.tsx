@@ -1,10 +1,9 @@
 import classes from './ItemOnPage.module.css';
 import { Item } from '../../types';
-// <Item, { planet: string }>
 
 const ItemOnPage = (props: Item) => {
   return (
-    <div className={classes.pagewrapper}>
+    <div className={classes.itemwrapper}>
       <div className={classes.view}>
         <span> {props.name} </span>
         <img className={classes.itemimg} src={props.image} alt="person name"></img>

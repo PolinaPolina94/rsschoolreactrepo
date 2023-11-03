@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import classes from './InputSearch.module.css';
 import { InputValue } from '../../types';
+import { useParams } from 'react-router-dom';
 
 const InputSearch = () => {
   const [state, setValue] = useState<InputValue | null>(null);
+  const { id } = useParams();
+  console.log(id);
   // state: InputValue = {
   //   value: '',
   // };

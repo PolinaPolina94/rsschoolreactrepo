@@ -11,6 +11,7 @@
 h1 {
   color: #6d14b8;
 }
+
 .reset,
 .button {
   border-radius: 20px;
@@ -20,4 +21,16 @@ h1 {
   cursor: pointer;
   border: 2px solid #69b7eb;
   width: 80px;
+}
+
+.errormessage {
+  color: #6d14b8;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.text {
+  font-size: 18px;
+  color: yellow;
+  text-shadow: #FB0 1px 0 10px;
 }
