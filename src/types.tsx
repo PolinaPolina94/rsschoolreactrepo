@@ -4,11 +4,17 @@ export type Item = {
   id?: number;
   name: string;
   image: string;
+  status?: string;
   species: string;
   type: string;
   gender: string;
   planet: string;
+  created?: string;
   origin?: {
+    name: string;
+    url: string;
+  };
+  location?: {
     name: string;
     url: string;
   };

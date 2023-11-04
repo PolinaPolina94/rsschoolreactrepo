@@ -4,17 +4,18 @@ import ItemOnPage from './ItemOnPage';
 import classes from './ItemOnPage.module.css';
 import Loader from '../loader/Loader';
 import Pagination from '../Pagination/Pagination';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
+import SelectorBtn from '../SelectorBtn/SelectorBtn';
 
 const MainPage = () => {
   const personName = localStorage.getItem('personName');
-
+  const countPages = Number(localStorage.getItem('countPages'));
+  // const countPagesNum = Number(countPages);
   const [state, setState] = useState<State | null>(null);
   // const [currentPage, setCurrentPage] = useState(1);
   // const [itemPerPage, setitemPerPage] = useState(20);
-
   const { id } = useParams();
-  console.log('hello', id);
+  console.log(countPages);
 
   useEffect(() => {
     if (!personName) {
@@ -66,20 +67,31 @@ const MainPage = () => {
     if (!loading) {
       return <Loader />;
     } else if (items) {
+      items.length = countPages;
       return (
         <main className={classes.main}>
           <Pagination />
-          {items.map((el: Item) => (
-            <ItemOnPage
-              key={el.id}
-              name={el.name}
-              image={el.image}
-              species={el.species}
-              type={el.type}
-              gender={el.gender}
-              planet={el.origin!.name}
-            />
-          ))}
+          <SelectorBtn />
+          <div className={classes.itemsonpage}>
+            <div>
+              {items.map((el: Item) => (
+                <ItemOnPage
+                  key={el.id}
+                  name={el.name}
+                  image={el.image}
+                  species={el.species}
+                  type={el.type}
+                  gender={el.gender}
+                  planet={el.origin!.name}
+                  id={el.id}
+                />
+              ))}
+            </div>
+            <div className={classes.itemperson}>
+              {' '}
+              <Outlet />
+            </div>
+          </div>
         </main>
       );
     } else {

@@ -94,7 +94,6 @@ const Paginator = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
   console.log(totalPages);
-
   useEffect(() => {
     fetch('https://rickandmortyapi.com/api/character')
       .then((res) => res.json())
@@ -113,12 +112,12 @@ const Paginator = () => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
+  // console.log(pages);
   const curP = page;
   const curPF = curP - 5 < 0 ? 0 : curP - 5;
   const curPL = curP + 5;
   const slicedPages = pages.slice(curPF, curPL);
   slicedPages.length <= 9;
-  console.log(curP);
   // const prev = (curP: number): void => {
   //   setPage(curP - 1);
   // };

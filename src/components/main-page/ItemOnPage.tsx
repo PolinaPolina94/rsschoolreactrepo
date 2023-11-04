@@ -1,12 +1,15 @@
 import classes from './ItemOnPage.module.css';
 import { Item } from '../../types';
+import { NavLink } from 'react-router-dom';
 
 const ItemOnPage = (props: Item) => {
   return (
     <div className={classes.itemwrapper}>
       <div className={classes.view}>
         <span> {props.name} </span>
-        <img className={classes.itemimg} src={props.image} alt="person name"></img>
+        <NavLink to={`character/${props.id}`} className={classes.link}>
+          <img className={classes.itemimg} src={props.image} alt="person name"></img>
+        </NavLink>
       </div>
       <div className={classes.description}>
         <span> Description 👾 </span>

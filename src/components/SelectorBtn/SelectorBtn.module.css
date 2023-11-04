@@ -1,0 +1,24 @@
+.btncontainer {
+    width:150px;
+    margin: auto;
+}
+  h1 {
+    color: #6d14b8;
+  }
+  
+  .buttonbtn {
+    border-radius: 20px;
+    background-color: aquamarine;
+    color: blueviolet;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid #69b7eb;
+    /* width: 180px; */
+    /* height:20px; */
+    margin-top:15px;
+    margin-bottom:15px;
+  }
+
+  .buttonbtn option {
+    font-weight: bold;
+  }
