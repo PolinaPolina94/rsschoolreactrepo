@@ -20,6 +20,11 @@ export type Item = {
   };
 };
 
+export type StateForPerson = {
+  isLoaded?: boolean;
+  item: Item;
+};
+
 export type State = {
   error?: null;
   isLoaded: boolean;

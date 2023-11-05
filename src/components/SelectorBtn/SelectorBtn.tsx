@@ -19,7 +19,7 @@ const SelectorBtn = () => {
           onChange={handleSelectChange}
         >
           <option value="">Choose items count 🖖</option>
-          <option value={5}> 5 items</option>
+          <option value={5}> 5 items </option>
           <option value={10}> 10 items</option>
           <option value={20}> 20 items</option>
         </select>

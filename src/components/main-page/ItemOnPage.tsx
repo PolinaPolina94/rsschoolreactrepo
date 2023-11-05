@@ -8,7 +8,6 @@ const ItemOnPage = (props: Item) => {
   const activeFilter = (event: React.MouseEvent): void => {
     localStorage.setItem('active', state);
     setState(event.currentTarget.id);
-    console.log(state);
   };
   const activeStyle = localStorage.getItem('active');
 

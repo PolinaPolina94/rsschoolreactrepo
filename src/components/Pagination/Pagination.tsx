@@ -15,10 +15,6 @@ const Paginator = () => {
       .then((info) => {
         setTotalItems(info.info.count);
         setTotalPages(info.info.pages);
-        // setState({
-        //   isLoaded: true,
-        //   items: result.results,
-        // });
       });
   });
 
@@ -27,16 +23,11 @@ const Paginator = () => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
-  // console.log(pages);
   const curP = page;
   const curPF = curP - 5 < 0 ? 0 : curP - 5;
   const curPL = curP + 5;
   const slicedPages = pages.slice(curPF, curPL);
   slicedPages.length <= 9;
-  // const prev = (curP: number): void => {
-  //   setPage(curP - 1);
-  // };
-
   return (
     <div
       className={

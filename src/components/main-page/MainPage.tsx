@@ -8,13 +8,19 @@ import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import SelectorBtn from '../SelectorBtn/SelectorBtn';
 
 const MainPage = () => {
+  const stateOp = {
+    isLoaded: false,
+    items: [],
+  };
   const personName = localStorage.getItem('personName');
-  const countPages = Number(localStorage.getItem('countPages'));
+  let countPages = Number(localStorage.getItem('countPages'));
   const activeStyle = localStorage.getItem('active');
   const navigate = useNavigate();
-  const [state, setState] = useState<State | null>(null);
+  const [state, setState] = useState<State | null>(stateOp);
   const { id } = useParams();
-  console.log(activeStyle);
+  if (!countPages) {
+    countPages = 5;
+  }
   const closeModal = () => {
     if (activeStyle === 'rockNew') {
       localStorage.setItem('active', '');
@@ -31,7 +37,7 @@ const MainPage = () => {
             items: result.results,
           });
         });
-    } else if (personName == null) {
+    } else if (personName == null && !countPages) {
       fetch(`https://rickandmortyapi.com/api/character/?page=1`)
         .then((res) => res.json())
         .then((result) => {
@@ -59,7 +65,7 @@ const MainPage = () => {
           });
         });
     }
-  }, [personName, id]);
+  }, [personName, id, countPages]);
   useEffect(() => {
     if (activeStyle === 'rockNew') {
       document.body.style.overflow = 'hidden';
