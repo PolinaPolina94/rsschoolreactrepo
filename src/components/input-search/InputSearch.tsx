@@ -1,15 +1,10 @@
 import { useState } from 'react';
 import classes from './InputSearch.module.css';
 import { InputValue } from '../../types';
-// import { useParams } from 'react-router-dom';
 
 const InputSearch = () => {
   const [state, setValue] = useState<InputValue | null>(null);
-  // const { id } = useParams();
-  // console.log(id);
-  // state: InputValue = {
-  //   value: '',
-  // };
+  const activeStyle = localStorage.getItem('active');
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     const newvalue = event.currentTarget.value.toLowerCase();
@@ -26,7 +21,13 @@ const InputSearch = () => {
   };
   return (
     <form onSubmit={handleFormSubmit}>
-      <div className={classes.inputwrapper}>
+      <div
+        className={
+          activeStyle === 'rockNew'
+            ? `${classes.inputwrapper} ${classes.disabled}`
+            : `${classes.inputwrapper}`
+        }
+      >
         <input type="text" name="name" placeholder="write here a name" onChange={handleChange} />
         <button className={classes.buttonsearch} type="submit">
           {' '}

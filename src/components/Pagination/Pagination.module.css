@@ -9,6 +9,10 @@
     text-content: center;
 }
 
+.container.disabled {
+    pointer-events: none;
+}
+
 a {
     border: 2px solid #ffd4ac;
     width:20px;

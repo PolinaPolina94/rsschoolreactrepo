@@ -5,6 +5,10 @@
   margin-top: 25px;
 }
 
+.inputwrapper.disabled {
+  pointer-events: none;
+}
+
 input {
   width: 250px;
   height: 30px;

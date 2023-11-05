@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Item } from '../../types';
 import classes from './Person.module.css';
@@ -6,6 +6,11 @@ import classes from './Person.module.css';
 const Person = () => {
   const { personId } = useParams();
   const [person, setPerson] = useState<Item | null>(null);
+  const navigate = useNavigate();
+  const clickclose = () => {
+    navigate(-1);
+    localStorage.setItem('active', '');
+  };
 
   useEffect(() => {
     fetch(`https://rickandmortyapi.com/api/character/${personId}`)
@@ -23,6 +28,10 @@ const Person = () => {
             {' '}
             IDENTIFICATION-NUMBER: <span> {person.id} </span>{' '}
           </p>
+          <button className={classes.button} onClick={clickclose}>
+            {' '}
+            x{' '}
+          </button>
         </div>
         <div className={classes.container}>
           <div>

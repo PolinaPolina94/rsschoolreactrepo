@@ -4,19 +4,23 @@ import ItemOnPage from './ItemOnPage';
 import classes from './ItemOnPage.module.css';
 import Loader from '../loader/Loader';
 import Pagination from '../Pagination/Pagination';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import SelectorBtn from '../SelectorBtn/SelectorBtn';
 
 const MainPage = () => {
   const personName = localStorage.getItem('personName');
   const countPages = Number(localStorage.getItem('countPages'));
-  // const countPagesNum = Number(countPages);
+  const activeStyle = localStorage.getItem('active');
+  const navigate = useNavigate();
   const [state, setState] = useState<State | null>(null);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [itemPerPage, setitemPerPage] = useState(20);
   const { id } = useParams();
-  console.log(countPages);
-
+  console.log(activeStyle);
+  const closeModal = () => {
+    if (activeStyle === 'rockNew') {
+      localStorage.setItem('active', '');
+      navigate(-1);
+    }
+  };
   useEffect(() => {
     if (!personName) {
       fetch(`https://rickandmortyapi.com/api/character/?page=${id}`)
@@ -56,14 +60,18 @@ const MainPage = () => {
         });
     }
   }, [personName, id]);
+  useEffect(() => {
+    if (activeStyle === 'rockNew') {
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '800px';
+    } else {
+      document.body.style.overflow = 'visible';
+    }
+  });
 
   if (state) {
     const loading = state.isLoaded;
     const items = state.items;
-
-    // const lastItemIndex = currentPage * itemPerPage;
-    // const firstItemIndex = lastItemIndex - itemPerPage;
-    // const currentItems = items.slice(firstItemIndex, lastItemIndex);
     if (!loading) {
       return <Loader />;
     } else if (items) {
@@ -72,8 +80,8 @@ const MainPage = () => {
         <main className={classes.main}>
           <Pagination />
           <SelectorBtn />
-          <div className={classes.itemsonpage}>
-            <div>
+          <div className={classes.itemsonpagecontainer}>
+            <div className={classes.itemsonpage} onClick={closeModal}>
               {items.map((el: Item) => (
                 <ItemOnPage
                   key={el.id}
@@ -87,7 +95,13 @@ const MainPage = () => {
                 />
               ))}
             </div>
-            <div className={classes.itemperson}>
+            <div
+              className={
+                activeStyle === 'rockNew'
+                  ? `${classes.itemperson} ${classes.active}`
+                  : `${classes.itemperson}`
+              }
+            >
               {' '}
               <Outlet />
             </div>

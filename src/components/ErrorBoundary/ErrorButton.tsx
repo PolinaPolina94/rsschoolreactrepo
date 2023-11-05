@@ -3,9 +3,8 @@ import classes from './ErrorPage.module.css';
 
 const ErrorButton = () => {
   const [hasError, sethasError] = useState(true);
-  // state = {
-  //   hasError: true,
-  // };
+  const activeStyle = localStorage.getItem('active');
+
   const handleErrorSubmit = () => {
     sethasError(false);
   };
@@ -13,7 +12,14 @@ const ErrorButton = () => {
     return (
       <>
         <form onSubmit={handleErrorSubmit}>
-          <button className={classes.button} type="submit">
+          <button
+            className={
+              activeStyle === 'rockNew'
+                ? `${classes.button} ${classes.disabled}`
+                : `${classes.button}`
+            }
+            type="submit"
+          >
             {' '}
             Error Button ♻{' '}
           </button>
