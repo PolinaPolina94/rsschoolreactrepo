@@ -5,9 +5,6 @@
   margin-top: 25px;
 }
 
-input.disabled {
-  pointer-events: none;
-}
 form.disabled {
   pointer-events: none;
 }

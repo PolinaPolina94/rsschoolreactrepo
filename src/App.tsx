@@ -35,8 +35,8 @@ const App = () => {
             >
               <Route path="details/:personId" element={<Person />} />
             </Route>
-            <Route path="*" element={<ErrorPageNavigation />} />
           </Route>
+          <Route path="*" element={<ErrorPageNavigation />} />
         </Routes>
       </ErrorBoundary>
     </>
