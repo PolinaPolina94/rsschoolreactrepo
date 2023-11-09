@@ -5,7 +5,10 @@
   margin-top: 25px;
 }
 
-.inputwrapper.disabled {
+input.disabled {
+  pointer-events: none;
+}
+form.disabled {
   pointer-events: none;
 }
 

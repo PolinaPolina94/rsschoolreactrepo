@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import classes from './InputSearch.module.css';
-import { InputValue } from '../../types';
+import { InputContext, InputContextApp } from '../Context/InputContext';
+import { useContext } from 'react';
 
 const InputSearch = () => {
-  const [state, setValue] = useState<InputValue | null>(null);
+  const { state, setValue } = useContext<InputContextApp>(InputContext);
   const activeStyle = localStorage.getItem('active');
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {

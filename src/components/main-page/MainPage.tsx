@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Item, State } from '../../types';
+import { useContext, useEffect } from 'react';
+import { Item } from '../../types';
 import ItemOnPage from './ItemOnPage';
 import classes from './ItemOnPage.module.css';
 import Loader from '../loader/Loader';
 import Pagination from '../Pagination/Pagination';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import SelectorBtn from '../SelectorBtn/SelectorBtn';
+import { ApiContext, ApiContextApp } from '../Context/ApiContext';
 
 const MainPage = () => {
-  const stateOp = {
-    isLoaded: false,
-    items: [],
-  };
   const personName = localStorage.getItem('personName');
   let countPages = Number(localStorage.getItem('countPages'));
   const activeStyle = localStorage.getItem('active');
   const navigate = useNavigate();
-  const [state, setState] = useState<State | null>(stateOp);
+
+  const { state, setState } = useContext<ApiContextApp>(ApiContext);
+  console.log(state);
+
   const { id } = useParams();
   if (!countPages) {
     countPages = 5;
@@ -65,7 +65,7 @@ const MainPage = () => {
           });
         });
     }
-  }, [personName, id, countPages]);
+  }, [personName, id, countPages, setState]);
   useEffect(() => {
     if (activeStyle === 'rockNew') {
       document.body.style.overflow = 'hidden';

@@ -22,11 +22,12 @@ export type Item = {
 
 export type StateForPerson = {
   isLoaded?: boolean;
-  item: Item;
+  items: Item[];
+  setState: React.Dispatch<React.SetStateAction<State | null>>;
 };
 
 export type State = {
-  error?: null;
+  // error?: null;
   isLoaded: boolean;
   items: Item[];
 };

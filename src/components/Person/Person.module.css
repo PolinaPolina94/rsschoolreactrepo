@@ -69,10 +69,10 @@ img:hover {
 .button {
     margin-left: 15px;
     border-radius: 50%;
-    border: 3px solid yellow;
+    border: 3px solid grey;
     width:25px;
     height: 25px;
     cursor: pointer;
     background: none;
-    color: yellow;
+    color: black;
 }
