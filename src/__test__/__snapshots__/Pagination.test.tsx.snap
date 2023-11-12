@@ -1,51 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tests for the InputSearch component Call local storage getItem method when component was mounted 1`] = `
+exports[`Pagination test URL is updating when page is changing 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <form>
-        <div
-          class="inputwrapper"
+      <div
+        class="container"
+      >
+        <a
+          href="/page/1"
         >
-          <input
-            name="name"
-            placeholder="write here a name"
-            type="text"
-          />
-          <button
-            class="buttonsearch"
-            type="submit"
-          >
-             
-            Search 🔎
-             
-          </button>
-        </div>
-      </form>
+           
+          1
+        </a>
+        <a
+          href="/page/2"
+        >
+           
+          2
+        </a>
+        <a
+          href="/page/3"
+        >
+           
+          3
+        </a>
+        <a
+          href="/page/4"
+        >
+           
+          4
+        </a>
+        <a
+          href="/page/5"
+        >
+           
+          5
+        </a>
+        <a
+          href="/page/6"
+        >
+           
+          6
+        </a>
+        <div
+          data-testid="PaginatorContent"
+        />
+      </div>
     </div>
   </body>,
   "container": <div>
-    <form>
-      <div
-        class="inputwrapper"
+    <div
+      class="container"
+    >
+      <a
+        href="/page/1"
       >
-        <input
-          name="name"
-          placeholder="write here a name"
-          type="text"
-        />
-        <button
-          class="buttonsearch"
-          type="submit"
-        >
-           
-          Search 🔎
-           
-        </button>
-      </div>
-    </form>
+         
+        1
+      </a>
+      <a
+        href="/page/2"
+      >
+         
+        2
+      </a>
+      <a
+        href="/page/3"
+      >
+         
+        3
+      </a>
+      <a
+        href="/page/4"
+      >
+         
+        4
+      </a>
+      <a
+        href="/page/5"
+      >
+         
+        5
+      </a>
+      <a
+        href="/page/6"
+      >
+         
+        6
+      </a>
+      <div
+        data-testid="PaginatorContent"
+      />
+    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

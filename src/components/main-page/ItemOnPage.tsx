@@ -12,7 +12,7 @@ const ItemOnPage = (props: Item) => {
   const activeStyle = localStorage.getItem('active');
 
   return (
-    <div className={classes.itemwrapper}>
+    <div className={classes.itemwrapper} id={'itemPerson'}>
       <div className={classes.view}>
         <span> {props.name} </span>
         <NavLink

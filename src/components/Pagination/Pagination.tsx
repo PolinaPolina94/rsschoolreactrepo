@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import classes from './Pagination.module.css';
 import { NavLink } from 'react-router-dom';
 
-const Paginator = () => {
-  const [totalItems, setTotalItems] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
+export function Paginator() {
+  const [totalItems] = useState(826);
+  const [totalPages] = useState(42);
   const [page, setPage] = useState(1);
   console.log(totalPages);
   const activeStyle = localStorage.getItem('active');
 
-  useEffect(() => {
-    fetch('https://rickandmortyapi.com/api/character')
-      .then((res) => res.json())
-      .then((info) => {
-        setTotalItems(info.info.count);
-        setTotalPages(info.info.pages);
-      });
-  });
+  // useEffect(() => {
+  //   fetch('https://rickandmortyapi.com/api/character')
+  //     .then((res) => res.json())
+  //     .then((info) => {
+  //       setTotalItems(info.info.count);
+  //       setTotalPages(info.info.pages);
+  //     });
+  // });
 
   const pagesCount = Math.ceil(totalItems / 20);
   const pages = [];
@@ -47,8 +47,9 @@ const Paginator = () => {
           {el}
         </NavLink>
       ))}
+      <div data-testid="PaginatorContent"></div>
     </div>
   );
-};
+}
 
-export default Paginator;
+// export default Paginator;

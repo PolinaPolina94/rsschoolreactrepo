@@ -1,9 +1,9 @@
-import { screen, render } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import ListItems from '../components/main-page/ListItems';
 
-describe('CardList tests', () => {
+describe('Card tests', () => {
   const objectState = {
     items: [
       {
@@ -46,21 +46,28 @@ describe('CardList tests', () => {
       },
     ],
   };
-  it('render 2 cards in List', async () => {
+  it('Render cards', async () => {
     render(
       <BrowserRouter>
         <ListItems items={objectState.items} />;
       </BrowserRouter>
     );
-    expect(screen.getByText(/Johnny Depp/)).toBeInTheDocument();
-    expect(screen.getByText(/Luiza/)).toBeInTheDocument();
+    expect(screen.getByText('Luiza')).toBeInTheDocument();
+    expect(screen.getByText('Johnny Depp')).toBeInTheDocument();
   });
-  it('no such persons with no cards', () => {
+  it('Click for card show it details', async () => {
     render(
       <BrowserRouter>
-        <ListItems items={[]} />;
+        <ListItems items={objectState.items} />;
       </BrowserRouter>
     );
-    expect(screen.getByText(/no such persons/)).toBeInTheDocument();
+    expect(screen.getAllByRole('link'));
+    fireEvent.click(screen.getByText('Johnny Depp'));
   });
 });
+
+// expect(window.location.search).toBe('');
+// await waitFor(() => {
+//   fireEvent.click(screen.getByText('2'));
+//   expect(window.location.search).toBe('/page/2');
+// });

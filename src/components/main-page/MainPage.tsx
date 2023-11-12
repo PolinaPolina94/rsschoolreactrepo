@@ -1,11 +1,12 @@
 import { useContext, useEffect } from 'react';
 import classes from './ItemOnPage.module.css';
 import Loader from '../loader/Loader';
-import Pagination from '../Pagination/Pagination';
+// import {Pagination } from '../Pagination/Pagination';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import SelectorBtn from '../SelectorBtn/SelectorBtn';
+// import SelectorBtn from '../SelectorBtn/SelectorBtn';
 import { ApiContext, ApiContextApp } from '../Context/ApiContext';
 import ListItems from './ListItems';
+// import { Paginator } from '../Pagination/Pagination';
 
 const MainPage = () => {
   const personName = localStorage.getItem('personName');
@@ -83,8 +84,6 @@ const MainPage = () => {
       items.length = countPages;
       return (
         <main className={classes.main}>
-          <Pagination />
-          <SelectorBtn />
           <div className={classes.itemsonpagecontainer}>
             <div className={classes.itemsonpage} onClick={closeModal}>
               {<ListItems items={items} />}

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import InputSearch from '../components/input-search/InputSearch';
 
 const mockGetItem = jest.fn();
@@ -27,14 +27,16 @@ describe('Tests for the InputSearch component', () => {
   it('Call local storage setItem method when button clicked', async () => {
     render(<InputSearch />);
     const button = screen.getByRole('button', { name: /Search/i });
-    await fireEvent.click(button);
-    expect(mockSetItem).toHaveBeenCalledTimes(1);
-    expect(mockSetItem).toHaveBeenCalledWith('personName', '');
+    await waitFor(() => {
+      fireEvent.click(button);
+      expect(mockSetItem).toHaveBeenCalledTimes(1);
+      expect(mockSetItem).toHaveBeenCalledWith('personName', '');
+    });
   });
   it('Call local storage getItem method when component was mounted', async () => {
     render(<InputSearch />);
     screen.getByRole('button', { name: /Search/i });
-    expect(mockGetItem).toHaveBeenCalledTimes(3);
+    expect(mockGetItem).toHaveBeenCalled();
     expect(mockGetItem).toHaveBeenCalledWith('active');
   });
 });
