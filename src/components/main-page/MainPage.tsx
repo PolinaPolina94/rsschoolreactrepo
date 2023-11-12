@@ -1,12 +1,11 @@
 import { useContext, useEffect } from 'react';
-import { Item } from '../../types';
-import ItemOnPage from './ItemOnPage';
 import classes from './ItemOnPage.module.css';
 import Loader from '../loader/Loader';
 import Pagination from '../Pagination/Pagination';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import SelectorBtn from '../SelectorBtn/SelectorBtn';
 import { ApiContext, ApiContextApp } from '../Context/ApiContext';
+import ListItems from './ListItems';
 
 const MainPage = () => {
   const personName = localStorage.getItem('personName');
@@ -88,7 +87,8 @@ const MainPage = () => {
           <SelectorBtn />
           <div className={classes.itemsonpagecontainer}>
             <div className={classes.itemsonpage} onClick={closeModal}>
-              {items.map((el: Item) => (
+              {<ListItems items={items} />}
+              {/* {items.map((el: Item) => (
                 <ItemOnPage
                   key={el.id}
                   name={el.name}
@@ -99,7 +99,7 @@ const MainPage = () => {
                   planet={el.origin!.name}
                   id={el.id}
                 />
-              ))}
+              ))} */}
             </div>
             <div
               className={

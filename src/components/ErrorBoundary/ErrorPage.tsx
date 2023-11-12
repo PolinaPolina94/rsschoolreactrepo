@@ -6,6 +6,7 @@ const ErrorPage = () => {
   };
   return (
     <>
+      <div>Sorry...error</div>
       <form onSubmit={handleResetSubmit}>
         <div className={classes.container}>
           <h1>Sorry... error</h1>
