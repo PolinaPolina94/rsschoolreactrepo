@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import classes from './SelectorBtn.module.css';
+import { ApiContext } from '../Context/ApiContext';
 
 const SelectorBtn = () => {
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
@@ -6,7 +8,8 @@ const SelectorBtn = () => {
     localStorage.setItem('countPages', value);
   };
   const activeStyle = localStorage.getItem('active');
-
+  const y = useContext(ApiContext);
+  console.log('lnasc', y);
   return (
     <form name="select-form">
       <div className={classes.btncontainer}>
