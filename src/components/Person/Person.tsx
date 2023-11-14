@@ -35,7 +35,7 @@ const Person = () => {
       return <Loader />;
     } else if (person && person.location && person.created) {
       return (
-        <>
+        <div role="person">
           <div className={classes.headerItem}>
             <h1 className={classes.personName}> {person.name} </h1>
             <p className={classes.id}>
@@ -71,7 +71,7 @@ const Person = () => {
               <span className={classes.created}> Was created in: {parseInt(person.created)}</span>
             </div>
           </div>
-        </>
+        </div>
       );
     }
   }

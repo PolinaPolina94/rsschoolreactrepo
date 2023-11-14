@@ -9,15 +9,6 @@ export function Paginator() {
   console.log(totalPages);
   const activeStyle = localStorage.getItem('active');
 
-  // useEffect(() => {
-  //   fetch('https://rickandmortyapi.com/api/character')
-  //     .then((res) => res.json())
-  //     .then((info) => {
-  //       setTotalItems(info.info.count);
-  //       setTotalPages(info.info.pages);
-  //     });
-  // });
-
   const pagesCount = Math.ceil(totalItems / 20);
   const pages = [];
   for (let i = 1; i <= pagesCount; i++) {
@@ -51,5 +42,3 @@ export function Paginator() {
     </div>
   );
 }
-
-// export default Paginator;

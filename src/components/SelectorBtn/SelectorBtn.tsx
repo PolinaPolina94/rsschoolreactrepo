@@ -11,7 +11,7 @@ const SelectorBtn = () => {
   const y = useContext(ApiContext);
   console.log('lnasc', y);
   return (
-    <form name="select-form">
+    <form name="select-form" role="selector">
       <div className={classes.btncontainer}>
         <select
           className={

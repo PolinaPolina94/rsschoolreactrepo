@@ -1,9 +1,34 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import ListItems from '../components/main-page/ListItems';
+import { ApiContext } from '../components/Context/ApiContext';
+import MainPage from '../components/main-page/MainPage';
+import fetchMock from 'jest-fetch-mock';
 
 describe('Card tests', () => {
+  it('Close the window with click', async () => {
+    fetchMock.mockResponse(JSON.stringify({ data: 'mock data' }));
+    const state = {
+      isLoaded: true,
+      items: [],
+      setState: () => {},
+    };
+    const setState = () => {};
+    render(
+      <BrowserRouter>
+        <ApiContext.Provider value={{ state, setState }}>
+          <MainPage />
+        </ApiContext.Provider>
+      </BrowserRouter>
+    );
+    expect(screen.getByRole('main'));
+    expect(screen.getByRole('itemsonpage'));
+    waitFor(() => {
+      fireEvent.click(screen.getByRole('itemsonpage'));
+      expect(screen.getByRole('person')).not.toBeInTheDocument();
+    });
+  });
   const objectState = {
     items: [
       {
@@ -65,9 +90,3 @@ describe('Card tests', () => {
     fireEvent.click(screen.getByText('Johnny Depp'));
   });
 });
-
-// expect(window.location.search).toBe('');
-// await waitFor(() => {
-//   fireEvent.click(screen.getByText('2'));
-//   expect(window.location.search).toBe('/page/2');
-// });

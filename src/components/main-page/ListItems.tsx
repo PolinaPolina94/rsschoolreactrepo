@@ -1,14 +1,11 @@
-// import { useContext } from 'react';
 import { Item } from '../../types';
 import ItemOnPage from './ItemOnPage';
-// import { ApiContext, ApiContextApp } from '../Context/ApiContext';
 
 type Person = {
   items: Item[];
 };
 
 const ListItems = (props: Person) => {
-  // const { state } = useContext<ApiContextApp>(ApiContext);
   const items = props.items;
   if (items.length) {
     return (

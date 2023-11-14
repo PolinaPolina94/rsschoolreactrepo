@@ -1,12 +1,9 @@
 import { useContext, useEffect } from 'react';
 import classes from './ItemOnPage.module.css';
 import Loader from '../loader/Loader';
-// import {Pagination } from '../Pagination/Pagination';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-// import SelectorBtn from '../SelectorBtn/SelectorBtn';
 import { ApiContext, ApiContextApp } from '../Context/ApiContext';
 import ListItems from './ListItems';
-// import { Paginator } from '../Pagination/Pagination';
 
 const MainPage = () => {
   const personName = localStorage.getItem('personName');
@@ -83,22 +80,10 @@ const MainPage = () => {
     } else if (items) {
       items.length = countPages;
       return (
-        <main className={classes.main}>
+        <main className={classes.main} role="main">
           <div className={classes.itemsonpagecontainer}>
-            <div className={classes.itemsonpage} onClick={closeModal}>
+            <div className={classes.itemsonpage} onClick={closeModal} role="itemsonpage">
               {<ListItems items={items} />}
-              {/* {items.map((el: Item) => (
-                <ItemOnPage
-                  key={el.id}
-                  name={el.name}
-                  image={el.image}
-                  species={el.species}
-                  type={el.type}
-                  gender={el.gender}
-                  planet={el.origin!.name}
-                  id={el.id}
-                />
-              ))} */}
             </div>
             <div
               className={
