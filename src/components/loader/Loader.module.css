@@ -3,7 +3,8 @@
   align-items: center;
   justify-content: center;
   min-height: 40vh;
-  background-color: #b3dbd3;
+  margin: auto;
+  background-color: none;
 }
 
 .loader {
