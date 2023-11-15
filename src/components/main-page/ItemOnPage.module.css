@@ -1,10 +1,19 @@
+.main {
+height:100%;
+}
+
+.itemsonpagecontainer {
+  display: flex;
+}
+
 .itemwrapper {
   display: flex;
   justify-content: center;
-  margin: auto;
   margin-top: 15px;
   height: 180px;
-  width: 600px;
+  width: 480px;
+  padding:0px;
+  background: #d8ffcf;
 }
 
 .view {
@@ -18,7 +27,6 @@
   font-weight: 600;
   width: 80px;
   color: slateblue;
-  /* margin: auto; */
   text-align: center;
   padding-left: 25px
 }
@@ -62,16 +70,20 @@
     box-shadow: 0 0 0 9999px rgba(0,0,0, 0.3);
     position: sticky;
     top: 25px;
+    right:15px;
 }
 
-
-.itemsonpagecontainer {
+.itemsonpage {
   display: flex;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  gap:5px;
   justify-content: center;
 }
 
+
 .itemperson {
-  background: #D0D0D0;
+  background: #eeffad;
   border-radius:5px;
   height: 400px;
 }
