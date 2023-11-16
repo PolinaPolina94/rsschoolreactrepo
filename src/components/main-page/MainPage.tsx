@@ -4,19 +4,20 @@ import classes from './ItemOnPage.module.css';
 // import { Outlet, useNavigate, useParams } from 'react-router-dom';
 // import { ApiContext, ApiContextApp } from '../Context/ApiContext';
 // import ListItems from './ListItems';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { useEffect } from 'react';
-import { fetchItems } from '../../store/reducers/ActionCreators';
+// import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+// import { useEffect } from 'react';
+// import { fetchItems } from '../../store/reducers/ActionCreators';
 import ListItems from './ListItems';
 import { Outlet } from 'react-router-dom';
 import Loader from '../loader/Loader';
+import { itemsAPI } from '../../services/ItemsService';
+// import { Item } from '../../types';
 
 const MainPage = () => {
-  // const personName = localStorage.getItem('personName');
+  const personName = localStorage.getItem('personName');
   // let countPages = Number(localStorage.getItem('countPages'));
   const activeStyle = localStorage.getItem('active');
   // const navigate = useNavigate();
-
   // const { state, setState } = useContext<ApiContextApp>(ApiContext);
   // console.log(state);
 
@@ -30,16 +31,15 @@ const MainPage = () => {
   //     navigate(-1);
   //   }
   // };
+  // ***************************************************************************************************
+  // const dispatch = useAppDispatch();
+  // const items = useAppSelector((state) => state.itemReducer.items);
+  // const isLoaded = useAppSelector((state) => state.itemReducer.isLoaded);
 
-  const dispatch = useAppDispatch();
-  const items = useAppSelector((state) => state.itemReducer.items);
-  const isLoaded = useAppSelector((state) => state.itemReducer.isLoaded);
-
-  useEffect(() => {
-    dispatch(fetchItems());
-  }, [dispatch]);
-  // console.log(items);
-
+  // useEffect(() => {
+  //   dispatch(fetchItems());
+  // }, [dispatch]);
+  // ****************************************************************************************************
   // useEffect(() => {
   //   if (!personName) {
   //     fetch(`https://rickandmortyapi.com/api/character/?page=${id}`)
@@ -95,36 +95,33 @@ const MainPage = () => {
   //     return <Loader />;
   //   } else if (items) {
   //     items.length = countPages;
+
+  const { data: data, isLoading, error } = itemsAPI.useFetchAllItemsQuery(personName!);
+  console.log(data);
+  const items = data?.data;
+
   return (
-    // <div>lala</div>
-
-    // <main className={classes.main} role="main">
-
-    <div className={classes.itemsonpagecontainer}>
-      {/* <div>{JSON.stringify(items)}</div> */}
-      {/* <div className={classes.itemsonpage} onClick={closeModal} role="itemsonpage"> */}
-
-      <div className={classes.itemsonpage} role="itemsonpage">
-        {<ListItems items={items} />}
-        {isLoaded && <Loader />}
+    <main className={classes.main} role="main">
+      <div className={classes.itemsonpagecontainer}>
+        {/* <div className={classes.itemsonpage} onClick={closeModal} role="itemsonpage"> */}
+        <div className={classes.itemsonpage} role="itemsonpage">
+          {items && <ListItems items={items} />}
+          {isLoading && <Loader />}
+          {error && <div className={classes.notfound}> no such name </div>}
+        </div>
+        <div
+          className={
+            activeStyle === 'rockNew'
+              ? `${classes.itemperson} ${classes.active}`
+              : `${classes.itemperson}`
+          }
+        >
+          {' '}
+          <Outlet />
+        </div>
       </div>
-      <div
-        className={
-          activeStyle === 'rockNew'
-            ? `${classes.itemperson} ${classes.active}`
-            : `${classes.itemperson}`
-        }
-      >
-        {' '}
-        <Outlet />
-      </div>
-    </div>
-    // </main>
+    </main>
   );
-  // } else {
-  //   return <div className={classes.notfound}> no such name </div>;
-  // }
-  // }
 };
 
 export default MainPage;
