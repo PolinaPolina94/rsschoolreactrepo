@@ -27,6 +27,7 @@ export type StateForPerson = {
 };
 
 export type State = {
+  error?: string;
   isLoaded: boolean;
   items: Item[];
 };
