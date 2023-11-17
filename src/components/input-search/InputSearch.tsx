@@ -1,28 +1,25 @@
 import classes from './InputSearch.module.css';
-import { InputContext, InputContextApp } from '../Context/InputContext';
-import { useContext } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { itemSlice } from '../../store/reducers/ItemSlice';
 
 const InputSearch = () => {
-  const person = useAppSelector((state) => state.itemReducer.person);
-  console.log(person);
+  let person = '';
+  person = useAppSelector((state) => state.itemReducer.person);
+  console.log('person', person);
   const { personNameReduser } = itemSlice.actions;
   const dispatch = useAppDispatch();
-
-  const { state, setValue } = useContext<InputContextApp>(InputContext);
   const activeStyle = localStorage.getItem('active');
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     const newvalue = event.currentTarget.value.toLowerCase();
-    setValue({ value: newvalue });
+    person = newvalue;
   };
 
   const handleFormSubmit = (): void => {
-    if (state) {
-      const name = state.value.toString();
+    if (person) {
+      const name = person;
       localStorage.setItem('personName', name);
-      dispatch(personNameReduser(state.value.toString()));
+      dispatch(personNameReduser(person.toString()));
     } else {
       localStorage.setItem('personName', '');
     }
