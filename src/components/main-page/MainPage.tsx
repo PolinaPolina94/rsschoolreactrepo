@@ -8,9 +8,8 @@ import { useAppDispatch } from '../../hooks/redux';
 import { useEffect } from 'react';
 
 const MainPage = () => {
-  // let countPages = Number(localStorage.getItem('countPages'));
+  const countPages = Number(localStorage.getItem('countPages'));
   const activeStyle = localStorage.getItem('active');
-  console.log('activeStyle', activeStyle);
   // const navigate = useNavigate();
   // const { state, setState } = useContext<ApiContextApp>(ApiContext);
   // console.log(state);
@@ -61,7 +60,6 @@ const MainPage = () => {
   // }, [personName, id, countPages, setState]);
   // useEffect(() => {
   //   if (activeStyle === 'rockNew') {
-  //     document.body.style.overflow = 'hidden';
   //     document.body.style.height = '800px';
   //   } else {
   //     document.body.style.overflow = 'visible';
@@ -90,13 +88,20 @@ const MainPage = () => {
       dispatch(loadedReduserPage(true));
     }
   });
+  console.log(countPages);
+  let itemslength;
+  if (items) {
+    itemslength = [...items];
+    itemslength.length = countPages;
+  }
+  console.log(itemslength);
 
   return (
     <main className={classes.main} role="main">
       <div className={classes.itemsonpagecontainer}>
         {/* <div className={classes.itemsonpage} onClick={closeModal} role="itemsonpage"> */}
         <div className={classes.itemsonpage} role="itemsonpage">
-          {items && <ListItems items={items} />}
+          {itemslength && <ListItems items={itemslength} />}
           {isLoading && <Loader />}
           {error && <div className={classes.notfound}> no such name </div>}
         </div>

@@ -5,7 +5,6 @@ import { itemSlice } from '../../store/reducers/ItemSlice';
 const InputSearch = () => {
   let person = '';
   person = useAppSelector((state) => state.itemReducer.person);
-  console.log('person', person);
   const { personNameReduser } = itemSlice.actions;
   const dispatch = useAppDispatch();
   const activeStyle = localStorage.getItem('active');

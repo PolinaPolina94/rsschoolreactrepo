@@ -1,15 +1,16 @@
-// import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classes from './SelectorBtn.module.css';
-// import { ApiContext } from '../Context/ApiContext';
 
 const SelectorBtn = () => {
+  const navigate = useNavigate();
+
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
     const value = event.currentTarget.value;
     localStorage.setItem('countPages', value);
+    console.log('change', value);
+    navigate('/page/1');
   };
   const activeStyle = localStorage.getItem('active');
-  // const y = useContext(ApiContext);
-  // console.log('lnasc', y);
   return (
     <form name="select-form" role="selector">
       <div className={classes.btncontainer}>
