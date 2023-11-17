@@ -8,20 +8,25 @@ import classes from './ItemOnPage.module.css';
 // import { useEffect } from 'react';
 // import { fetchItems } from '../../store/reducers/ActionCreators';
 import ListItems from './ListItems';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import Loader from '../loader/Loader';
 import { itemsAPI } from '../../services/ItemsService';
+import { itemSlice } from '../../store/reducers/ItemSlice';
+import { useAppDispatch } from '../../hooks/redux';
+import { useEffect } from 'react';
+// import { useAppSelector } from '../../hooks/redux';
+// import { useEffect } from 'react';
 // import { Item } from '../../types';
 
 const MainPage = () => {
-  const personName = localStorage.getItem('personName');
   // let countPages = Number(localStorage.getItem('countPages'));
   const activeStyle = localStorage.getItem('active');
   // const navigate = useNavigate();
   // const { state, setState } = useContext<ApiContextApp>(ApiContext);
   // console.log(state);
 
-  // const { id } = useParams();
+  const { id } = useParams();
+  const idNumber = Number(id);
   // if (!countPages) {
   //   countPages = 5;
   // }
@@ -95,10 +100,17 @@ const MainPage = () => {
   //     return <Loader />;
   //   } else if (items) {
   //     items.length = countPages;
-
-  const { data: data, isLoading, error } = itemsAPI.useFetchAllItemsQuery(personName!);
-  console.log(data);
+  const { data: data, isLoading, error } = itemsAPI.useFetchAllItemsQuery(idNumber);
   const items = data?.data;
+
+  const { personItemsReduser } = itemSlice.actions;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (items) {
+      dispatch(personItemsReduser(items));
+    }
+  });
 
   return (
     <main className={classes.main} role="main">

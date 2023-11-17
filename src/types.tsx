@@ -32,6 +32,13 @@ export type State = {
   items: Item[];
 };
 
+export type StateRedux = {
+  error?: string;
+  isLoaded: boolean;
+  items: Item[];
+  person: string;
+};
+
 export type InputValue = {
   value: string;
 };

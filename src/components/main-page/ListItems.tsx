@@ -25,9 +25,6 @@ const ListItems = (props: Person) => {
       </>
     );
   }
-  // } else {
-  //   return <div> {'no such persons'} </div>;
-  // }
 };
 
 export default ListItems;
