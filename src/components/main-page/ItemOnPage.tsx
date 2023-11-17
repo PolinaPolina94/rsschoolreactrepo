@@ -1,13 +1,9 @@
 import classes from './ItemOnPage.module.css';
 import { Item } from '../../types';
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
 const ItemOnPage = (props: Item) => {
-  const [state, setState] = useState('rockNew');
-
-  const activeFilter = (event: React.MouseEvent): void => {
-    localStorage.setItem('active', state);
-    setState(event.currentTarget.id);
+  const activeFilter = (): void => {
+    localStorage.setItem('active', 'rockNew');
   };
   const activeStyle = localStorage.getItem('active');
 

@@ -18,6 +18,12 @@ export const itemSlice = createSlice({
     personItemsReduser(state, action: PayloadAction<Item[]>) {
       state.items = action.payload;
     },
+    loadedReduserPage(state, action: PayloadAction<boolean>) {
+      state.isLoaded = action.payload;
+    },
+    loadedReduserDetails(state, action: PayloadAction<boolean>) {
+      state.isLoaded = action.payload;
+    },
   },
   extraReducers: {
     [fetchItems.pending.type]: (state) => {

@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { Item } from '../../types';
 import classes from './Person.module.css';
 import Loader from '../loader/Loader';
+import { itemSlice } from '../../store/reducers/ItemSlice';
+import { useAppDispatch } from '../../hooks/redux';
 
 const Person = () => {
   const { personId } = useParams();
@@ -17,6 +19,8 @@ const Person = () => {
     item: person,
   };
   const [statePerson, setStatePerson] = useState(obj);
+  const { loadedReduserDetails } = itemSlice.actions;
+  const dispatch = useAppDispatch();
   useEffect(() => {
     fetch(`https://rickandmortyapi.com/api/character/${personId}`)
       .then((res) => res.json())
@@ -26,13 +30,19 @@ const Person = () => {
           isLoaded: true,
           item: result,
         });
+        dispatch(loadedReduserDetails(true));
       });
-  }, [personId]);
+  }, [personId, dispatch, loadedReduserDetails]);
   console.log(statePerson);
   if (statePerson) {
     const isLoaded = statePerson.isLoaded;
     if (!isLoaded) {
-      return <Loader />;
+      return (
+        <div className={classes.loaderdetails}>
+          {' '}
+          <Loader />
+        </div>
+      );
     } else if (person && person.location && person.created) {
       return (
         <div role="person">

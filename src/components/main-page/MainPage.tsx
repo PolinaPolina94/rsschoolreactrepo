@@ -1,12 +1,4 @@
-// import { useContext, useEffect } from 'react';
 import classes from './ItemOnPage.module.css';
-// import Loader from '../loader/Loader';
-// import { Outlet, useNavigate, useParams } from 'react-router-dom';
-// import { ApiContext, ApiContextApp } from '../Context/ApiContext';
-// import ListItems from './ListItems';
-// import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-// import { useEffect } from 'react';
-// import { fetchItems } from '../../store/reducers/ActionCreators';
 import ListItems from './ListItems';
 import { Outlet, useParams } from 'react-router-dom';
 import Loader from '../loader/Loader';
@@ -14,13 +6,11 @@ import { itemsAPI } from '../../services/ItemsService';
 import { itemSlice } from '../../store/reducers/ItemSlice';
 import { useAppDispatch } from '../../hooks/redux';
 import { useEffect } from 'react';
-// import { useAppSelector } from '../../hooks/redux';
-// import { useEffect } from 'react';
-// import { Item } from '../../types';
 
 const MainPage = () => {
   // let countPages = Number(localStorage.getItem('countPages'));
   const activeStyle = localStorage.getItem('active');
+  console.log('activeStyle', activeStyle);
   // const navigate = useNavigate();
   // const { state, setState } = useContext<ApiContextApp>(ApiContext);
   // console.log(state);
@@ -30,21 +20,6 @@ const MainPage = () => {
   // if (!countPages) {
   //   countPages = 5;
   // }
-  // const closeModal = () => {
-  //   if (activeStyle === 'rockNew') {
-  //     localStorage.setItem('active', '');
-  //     navigate(-1);
-  //   }
-  // };
-  // ***************************************************************************************************
-  // const dispatch = useAppDispatch();
-  // const items = useAppSelector((state) => state.itemReducer.items);
-  // const isLoaded = useAppSelector((state) => state.itemReducer.isLoaded);
-
-  // useEffect(() => {
-  //   dispatch(fetchItems());
-  // }, [dispatch]);
-  // ****************************************************************************************************
   // useEffect(() => {
   //   if (!personName) {
   //     fetch(`https://rickandmortyapi.com/api/character/?page=${id}`)
@@ -104,11 +79,15 @@ const MainPage = () => {
   const items = data?.data;
 
   const { personItemsReduser } = itemSlice.actions;
+  const { loadedReduserPage } = itemSlice.actions;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (items) {
       dispatch(personItemsReduser(items));
+      dispatch(loadedReduserPage(false));
+    } else {
+      dispatch(loadedReduserPage(true));
     }
   });
 

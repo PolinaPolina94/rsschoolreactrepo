@@ -76,3 +76,8 @@ img:hover {
     background: none;
     color: black;
 }
+
+
+.loaderdetails {
+    width: 300px;
+}
