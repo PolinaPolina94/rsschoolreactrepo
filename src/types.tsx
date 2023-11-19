@@ -34,7 +34,8 @@ export type State = {
 
 export type StateRedux = {
   error?: string;
-  isLoaded: boolean;
+  isLoadedPage: boolean;
+  isLoadedDetail: boolean;
   items: Item[];
   person: string;
 };

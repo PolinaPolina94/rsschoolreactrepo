@@ -3,7 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Item, StateRedux } from '../../types';
 
 const initialState: StateRedux = {
-  isLoaded: false,
+  isLoadedPage: false,
+  isLoadedDetail: false,
   items: [],
   person: '',
 };
@@ -19,23 +20,23 @@ export const itemSlice = createSlice({
       state.items = action.payload;
     },
     loadedReduserPage(state, action: PayloadAction<boolean>) {
-      state.isLoaded = action.payload;
+      state.isLoadedPage = action.payload;
     },
     loadedReduserDetails(state, action: PayloadAction<boolean>) {
-      state.isLoaded = action.payload;
+      state.isLoadedDetail = action.payload;
     },
   },
   extraReducers: {
     [fetchItems.pending.type]: (state) => {
-      state.isLoaded = true;
+      state.isLoadedPage = true;
     },
     [fetchItems.fulfilled.type]: (state, action: PayloadAction<Item[]>) => {
-      state.isLoaded = false;
+      state.isLoadedPage = false;
       state.error = '';
       state.items = action.payload;
     },
     [fetchItems.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoaded = false;
+      state.isLoadedPage = false;
       state.error = action.payload;
     },
   },

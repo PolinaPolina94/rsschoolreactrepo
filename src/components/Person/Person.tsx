@@ -21,6 +21,7 @@ const Person = () => {
   const [statePerson, setStatePerson] = useState(obj);
   const { loadedReduserDetails } = itemSlice.actions;
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     fetch(`https://rickandmortyapi.com/api/character/${personId}`)
       .then((res) => res.json())
@@ -30,13 +31,13 @@ const Person = () => {
           isLoaded: true,
           item: result,
         });
-        dispatch(loadedReduserDetails(true));
       });
   }, [personId, dispatch, loadedReduserDetails]);
   console.log(statePerson);
   if (statePerson) {
     const isLoaded = statePerson.isLoaded;
     if (!isLoaded) {
+      dispatch(loadedReduserDetails(true));
       return (
         <div className={classes.loaderdetails}>
           {' '}
@@ -44,6 +45,7 @@ const Person = () => {
         </div>
       );
     } else if (person && person.location && person.created) {
+      dispatch(loadedReduserDetails(false));
       return (
         <div role="person">
           <div className={classes.headerItem}>

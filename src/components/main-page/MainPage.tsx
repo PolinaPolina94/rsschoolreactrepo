@@ -24,10 +24,8 @@ const MainPage = () => {
   useEffect(() => {
     if (items && name) {
       dispatch(personItemsReduser(items));
-      dispatch(loadedReduserPage(false));
       dispatch(personNameReduser(name));
     } else {
-      dispatch(loadedReduserPage(true));
       dispatch(personNameReduser(''));
     }
   });
@@ -39,13 +37,17 @@ const MainPage = () => {
     itemslength = [...items];
     itemslength.length = countPages;
   }
-
+  if (isLoading) {
+    dispatch(loadedReduserPage(true));
+    return <Loader />;
+  } else {
+    dispatch(loadedReduserPage(false));
+  }
   return (
     <main className={classes.main} role="main">
       <div className={classes.itemsonpagecontainer}>
         <div className={classes.itemsonpage} role="itemsonpage">
           {itemslength && <ListItems items={itemslength} />}
-          {isLoading && <Loader />}
           {error && <div className={classes.notfound}> no such name, press Search </div>}
         </div>
         <div
