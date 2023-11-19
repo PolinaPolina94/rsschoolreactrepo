@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">85.29% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>26/30</span>
+                <span class='fraction'>29/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.63% </span>
+                <span class="strong">64.28% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/11</span>
+                <span class='fraction'>9/14</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">85.29% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>26/30</span>
+                <span class='fraction'>29/34</span>
             </div>
         
             
@@ -124,7 +124,12 @@
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -135,6 +140,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -143,25 +150,28 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -195,7 +205,9 @@ import { useAppDispatch } from '../../hooks/redux';
 import { useEffect } from 'react';
 &nbsp;
 const MainPage = () =&gt; {
-  const countPages = Number(localStorage.getItem('countPages'));
+  let countPages = Number(localStorage.getItem('countPages'));
+  const name = localStorage.getItem('personName');
+&nbsp;
   const activeStyle = localStorage.getItem('active');
   const { id } = useParams();
   const idNumber = Number(id);
@@ -203,32 +215,35 @@ const MainPage = () =&gt; {
   const items = data?.data;
   const { personItemsReduser } = itemSlice.actions;
   const { loadedReduserPage } = itemSlice.actions;
+  const { personNameReduser } = itemSlice.actions;
   const dispatch = useAppDispatch();
 &nbsp;
   useEffect(() =&gt; {
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (items) {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (items &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >name)</span> {
 <span class="cstat-no" title="statement not covered" >      dispatch(personItemsReduser(items));</span>
 <span class="cstat-no" title="statement not covered" >      dispatch(loadedReduserPage(false));</span>
+<span class="cstat-no" title="statement not covered" >      dispatch(personNameReduser(name));</span>
     } else {
       dispatch(loadedReduserPage(true));
+      dispatch(personNameReduser(''));
     }
   });
-  console.log(countPages);
+  if (!countPages) {
+    countPages = 10;
+  }
   let itemslength;
   <span class="missing-if-branch" title="if path not taken" >I</span>if (items) {
 <span class="cstat-no" title="statement not covered" >    itemslength = [...items];</span>
 <span class="cstat-no" title="statement not covered" >    itemslength.length = countPages;</span>
   }
-  console.log(itemslength);
 &nbsp;
   return (
     &lt;main className={classes.main} role="main"&gt;
       &lt;div className={classes.itemsonpagecontainer}&gt;
-        {/* &lt;div className={classes.itemsonpage} onClick={closeModal} role="itemsonpage"&gt; */}
         &lt;div className={classes.itemsonpage} role="itemsonpage"&gt;
           {itemslength &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >&lt;ListItems items={itemslength} /&gt;}</span>
           {isLoading &amp;&amp; &lt;Loader /&gt;}
-          {error &amp;&amp; &lt;div className={classes.notfound}&gt; no such name &lt;/div&gt;}
+          {error &amp;&amp; &lt;div className={classes.notfound}&gt; no such name, press Search &lt;/div&gt;}
         &lt;/div&gt;
         &lt;div
           className={
@@ -253,7 +268,7 @@ export default MainPage;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-19T08:49:34.399Z
+                at 2023-11-19T15:36:06.132Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

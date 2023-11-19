@@ -9,6 +9,8 @@ import { useEffect } from 'react';
 
 const MainPage = () => {
   let countPages = Number(localStorage.getItem('countPages'));
+  const name = localStorage.getItem('personName');
+
   const activeStyle = localStorage.getItem('active');
   const { id } = useParams();
   const idNumber = Number(id);
@@ -16,17 +18,19 @@ const MainPage = () => {
   const items = data?.data;
   const { personItemsReduser } = itemSlice.actions;
   const { loadedReduserPage } = itemSlice.actions;
+  const { personNameReduser } = itemSlice.actions;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (items) {
+    if (items && name) {
       dispatch(personItemsReduser(items));
       dispatch(loadedReduserPage(false));
+      dispatch(personNameReduser(name));
     } else {
       dispatch(loadedReduserPage(true));
+      dispatch(personNameReduser(''));
     }
   });
-
   if (!countPages) {
     countPages = 10;
   }

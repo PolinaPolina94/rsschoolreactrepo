@@ -28,8 +28,14 @@ describe('InputSearch', () => {
     mockedDispatch.mockReturnValue(jest.fn());
     render(<InputSearch />);
     const button = screen.getByRole('button', { name: /Search/i });
+    const buttonTwo = screen.getByRole('button', { name: /Reset/i });
     await waitFor(() => {
       fireEvent.submit(button);
+      expect(mockSetItem).toHaveBeenCalled();
+      expect(mockSetItem).toHaveBeenCalledWith('personName', []);
+    });
+    await waitFor(() => {
+      fireEvent.submit(buttonTwo);
       expect(mockSetItem).toHaveBeenCalled();
       expect(mockSetItem).toHaveBeenCalledWith('personName', []);
     });

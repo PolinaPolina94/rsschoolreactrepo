@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { itemSlice } from '../../store/reducers/ItemSlice';
 
 const InputSearch = () => {
-  let person = '';
+  let person: string;
   person = useAppSelector((state) => state.itemReducer.person);
   const { personNameReduser } = itemSlice.actions;
   const dispatch = useAppDispatch();
@@ -17,11 +17,16 @@ const InputSearch = () => {
   const handleFormSubmit = (): void => {
     if (person) {
       const name = person;
+      dispatch(personNameReduser(person));
       localStorage.setItem('personName', name);
-      dispatch(personNameReduser(person.toString()));
     } else {
       localStorage.setItem('personName', '');
     }
+  };
+
+  const handleReset = () => {
+    console.log('reset');
+    dispatch(personNameReduser(''));
   };
 
   return (
@@ -37,6 +42,10 @@ const InputSearch = () => {
         <button className={classes.buttonsearch} type="submit">
           {' '}
           Search 🔎{' '}
+        </button>
+        <button className={classes.buttonsearch} type="submit" onClick={handleReset}>
+          {' '}
+          Reset 👌{' '}
         </button>
       </div>
     </form>
