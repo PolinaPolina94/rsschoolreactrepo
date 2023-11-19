@@ -8,7 +8,7 @@ import { useAppDispatch } from '../../hooks/redux';
 import { useEffect } from 'react';
 
 const MainPage = () => {
-  const countPages = Number(localStorage.getItem('countPages'));
+  let countPages = Number(localStorage.getItem('countPages'));
   const activeStyle = localStorage.getItem('active');
   const { id } = useParams();
   const idNumber = Number(id);
@@ -26,22 +26,23 @@ const MainPage = () => {
       dispatch(loadedReduserPage(true));
     }
   });
-  console.log(countPages);
+
+  if (!countPages) {
+    countPages = 10;
+  }
   let itemslength;
   if (items) {
     itemslength = [...items];
     itemslength.length = countPages;
   }
-  console.log(itemslength);
 
   return (
     <main className={classes.main} role="main">
       <div className={classes.itemsonpagecontainer}>
-        {/* <div className={classes.itemsonpage} onClick={closeModal} role="itemsonpage"> */}
         <div className={classes.itemsonpage} role="itemsonpage">
           {itemslength && <ListItems items={itemslength} />}
           {isLoading && <Loader />}
-          {error && <div className={classes.notfound}> no such name </div>}
+          {error && <div className={classes.notfound}> no such name, press Search </div>}
         </div>
         <div
           className={
