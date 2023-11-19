@@ -23,6 +23,7 @@ const InputSearch = () => {
       localStorage.setItem('personName', '');
     }
   };
+
   return (
     <form onSubmit={handleFormSubmit}>
       <div

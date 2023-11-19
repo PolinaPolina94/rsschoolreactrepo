@@ -17,6 +17,7 @@ const ItemOnPage = (props: Item) => {
             activeStyle === 'rockNew' ? `${classes.link} ${classes.disabled}` : `${classes.link}`
           }
           onClick={activeFilter}
+          role="img"
         >
           <img className={classes.itemimg} src={props.image} alt="person name" id="rockNew"></img>
         </NavLink>

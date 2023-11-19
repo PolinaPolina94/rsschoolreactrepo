@@ -18,8 +18,8 @@ type Transform = {
 export const itemsAPI = createApi({
   reducerPath: 'itemsAPI',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://rickandmortyapi.com/api/character/' }),
-  endpoints: (build) => ({
-    fetchAllItems: build.query<Transform, number | string | undefined>({
+  endpoints: (builder) => ({
+    fetchAllItems: builder.query<Transform, number | string | undefined>({
       query: (page: number = 1) => {
         const personName = localStorage.getItem('personName');
         return `?page=${page}&name=${personName}`;

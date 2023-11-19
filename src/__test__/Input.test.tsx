@@ -1,42 +1,37 @@
-// import '@testing-library/jest-dom';
-// import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-// import InputSearch from '../components/input-search/InputSearch';
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import InputSearch from '../components/input-search/InputSearch';
+import * as reduxHooks from 'react-redux';
 
-// const mockGetItem = jest.fn();
-// const mockSetItem = jest.fn();
-// Object.defineProperty(window, 'localStorage', {
-//   value: {
-//     getItem: (...args: []) => mockGetItem(...args),
-//     setItem: (...args: []) => mockSetItem(...args),
-//   },
-// });
+jest.mock('react-redux');
+const mockedDispatch = jest.spyOn(reduxHooks, 'useDispatch');
 
-// describe('InputSearch', () => {
-//   it('Show input', () => {
-//     render(<InputSearch />);
-//     const input = screen.getByPlaceholderText('write here a name');
-//     expect(input).toBeInTheDocument();
-//     screen.debug();
-//   });
-// });
-
-// describe('Tests for the InputSearch component', () => {
-//   beforeEach(() => {
-//     mockSetItem.mockClear();
-//   });
-//   it('Call local storage setItem method when button clicked', async () => {
-//     render(<InputSearch />);
-//     const button = screen.getByRole('button', { name: /Search/i });
-//     await waitFor(() => {
-//       fireEvent.click(button);
-//       expect(mockSetItem).toHaveBeenCalledTimes(1);
-//       expect(mockSetItem).toHaveBeenCalledWith('personName', '');
-//     });
-//   });
-//   it('Call local storage getItem method when component was mounted', async () => {
-//     render(<InputSearch />);
-//     screen.getByRole('button', { name: /Search/i });
-//     expect(mockGetItem).toHaveBeenCalled();
-//     expect(mockGetItem).toHaveBeenCalledWith('active');
-//   });
-// });
+const mockGetItem = jest.fn();
+const mockSetItem = jest.fn();
+Object.defineProperty(window, 'localStorage', {
+  value: {
+    getItem: (...args: []) => mockGetItem(...args),
+    setItem: (...args: []) => mockSetItem(...args),
+  },
+});
+describe('InputSearch', () => {
+  beforeEach(() => {
+    mockSetItem.mockClear();
+  });
+  it('Show input', () => {
+    jest.spyOn(reduxHooks, 'useSelector').mockReturnValue([]);
+    render(<InputSearch />);
+    const input = screen.getByPlaceholderText('write here a name');
+    expect(input).toBeInTheDocument();
+  });
+  it('Call local storage setItem method when button clicked', async () => {
+    mockedDispatch.mockReturnValue(jest.fn());
+    render(<InputSearch />);
+    const button = screen.getByRole('button', { name: /Search/i });
+    await waitFor(() => {
+      fireEvent.submit(button);
+      expect(mockSetItem).toHaveBeenCalled();
+      expect(mockSetItem).toHaveBeenCalledWith('personName', []);
+    });
+  });
+});

@@ -1,6 +1,6 @@
+import { fetchItems } from './ActionCreators';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Item, StateRedux } from '../../types';
-import { fetchItems } from './ActionCreators';
 
 const initialState: StateRedux = {
   isLoaded: false,
