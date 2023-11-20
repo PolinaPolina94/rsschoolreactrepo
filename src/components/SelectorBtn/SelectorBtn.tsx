@@ -1,0 +1,34 @@
+import { useNavigate } from 'react-router-dom';
+import classes from './SelectorBtn.module.css';
+
+const SelectorBtn = () => {
+  const navigate = useNavigate();
+
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    const value = event.currentTarget.value;
+    localStorage.setItem('countPages', value);
+    navigate('/page/1');
+  };
+  const activeStyle = localStorage.getItem('active');
+  return (
+    <form name="select-form" role="selector">
+      <div className={classes.btncontainer}>
+        <select
+          className={
+            activeStyle === 'rockNew'
+              ? `${classes.buttonbtn} ${classes.disabled}`
+              : `${classes.buttonbtn}`
+          }
+          onChange={handleSelectChange}
+        >
+          <option value="">Choose items count 🖖</option>
+          <option value={5}> 5 items </option>
+          <option value={10}> 10 items</option>
+          <option value={20}> 20 items</option>
+        </select>
+      </div>
+    </form>
+  );
+};
+
+export default SelectorBtn;
