@@ -1,4 +1,4 @@
-import { fetchItems } from './ActionCreators';
+// import { fetchItems } from './ActionCreators';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Item, StateRedux } from '../../types';
 
@@ -30,20 +30,22 @@ export const itemSlice = createSlice({
       state.countItems = action.payload;
     },
   },
-  extraReducers: {
-    [fetchItems.pending.type]: (state) => {
-      state.isLoadedPage = true;
-    },
-    [fetchItems.fulfilled.type]: (state, action: PayloadAction<Item[]>) => {
-      state.isLoadedPage = false;
-      state.error = '';
-      state.items = action.payload;
-    },
-    [fetchItems.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoadedPage = false;
-      state.error = action.payload;
-    },
-  },
+  // ******************** DON'T LOOK AT THIS COMMENT CODE, I REALLY NEED IT :)  THANKS ***********************
+
+  // extraReducers: {
+  //   [fetchItems.pending.type]: (state) => {
+  //     state.isLoadedPage = true;
+  //   },
+  //   [fetchItems.fulfilled.type]: (state, action: PayloadAction<Item[]>) => {
+  //     state.isLoadedPage = false;
+  //     state.error = '';
+  //     state.items = action.payload;
+  //   },
+  //   [fetchItems.rejected.type]: (state, action: PayloadAction<string>) => {
+  //     state.isLoadedPage = false;
+  //     state.error = action.payload;
+  //   },
+  // },
 });
 
 export default itemSlice.reducer;
