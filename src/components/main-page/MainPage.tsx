@@ -26,9 +26,11 @@ const MainPage = () => {
     if (items && name && countPages) {
       dispatch(personItemsReduser(items));
       dispatch(personNameReduser(name));
-      dispatch(itemsCountReducer(countPages));
     } else {
       dispatch(personNameReduser(''));
+    }
+    if (countPages) {
+      dispatch(itemsCountReducer(countPages));
     }
   });
   console.log(items);
