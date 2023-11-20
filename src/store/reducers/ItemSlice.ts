@@ -7,6 +7,7 @@ const initialState: StateRedux = {
   isLoadedDetail: false,
   items: [],
   person: '',
+  countItems: 10,
 };
 
 export const itemSlice = createSlice({
@@ -24,6 +25,9 @@ export const itemSlice = createSlice({
     },
     loadedReduserDetails(state, action: PayloadAction<boolean>) {
       state.isLoadedDetail = action.payload;
+    },
+    itemsCountReducer(state, action: PayloadAction<number>) {
+      state.countItems = action.payload;
     },
   },
   extraReducers: {

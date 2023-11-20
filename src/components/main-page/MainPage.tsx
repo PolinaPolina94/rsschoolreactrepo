@@ -1,11 +1,12 @@
 import classes from './ItemOnPage.module.css';
 import ListItems from './ListItems';
 import { Outlet, useParams } from 'react-router-dom';
-import Loader from '../loader/Loader';
+// import Loader from '../loader/Loader';
 import { itemsAPI } from '../../services/ItemsService';
 import { itemSlice } from '../../store/reducers/ItemSlice';
 import { useAppDispatch } from '../../hooks/redux';
 import { useEffect } from 'react';
+import Loader from '../loader/Loader';
 
 const MainPage = () => {
   let countPages = Number(localStorage.getItem('countPages'));
@@ -17,18 +18,20 @@ const MainPage = () => {
   const { data: data, isLoading, error } = itemsAPI.useFetchAllItemsQuery(idNumber);
   const items = data?.data;
   const { personItemsReduser } = itemSlice.actions;
-  const { loadedReduserPage } = itemSlice.actions;
   const { personNameReduser } = itemSlice.actions;
+  const { itemsCountReducer } = itemSlice.actions;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (items && name) {
+    if (items && name && countPages) {
       dispatch(personItemsReduser(items));
       dispatch(personNameReduser(name));
+      dispatch(itemsCountReducer(countPages));
     } else {
       dispatch(personNameReduser(''));
     }
   });
+  console.log(items);
   if (!countPages) {
     countPages = 10;
   }
@@ -37,16 +40,11 @@ const MainPage = () => {
     itemslength = [...items];
     itemslength.length = countPages;
   }
-  if (isLoading) {
-    dispatch(loadedReduserPage(true));
-    return <Loader />;
-  } else {
-    dispatch(loadedReduserPage(false));
-  }
   return (
     <main className={classes.main} role="main">
       <div className={classes.itemsonpagecontainer}>
         <div className={classes.itemsonpage} role="itemsonpage">
+          {isLoading && <Loader />}
           {itemslength && <ListItems items={itemslength} />}
           {error && <div className={classes.notfound}> no such name, press Search </div>}
         </div>

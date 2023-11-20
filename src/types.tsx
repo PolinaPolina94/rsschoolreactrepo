@@ -38,6 +38,7 @@ export type StateRedux = {
   isLoadedDetail: boolean;
   items: Item[];
   person: string;
+  countItems: number;
 };
 
 export type InputValue = {
