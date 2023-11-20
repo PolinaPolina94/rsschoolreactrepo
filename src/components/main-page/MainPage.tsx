@@ -20,6 +20,8 @@ const MainPage = () => {
   const { personItemsReduser } = itemSlice.actions;
   const { personNameReduser } = itemSlice.actions;
   const { itemsCountReducer } = itemSlice.actions;
+  const { loadedReduserPage } = itemSlice.actions;
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -34,6 +36,12 @@ const MainPage = () => {
     }
     if (items && !name) {
       dispatch(personItemsReduser(items));
+    }
+    if (!items) {
+      dispatch(loadedReduserPage(true));
+    }
+    if (items) {
+      dispatch(loadedReduserPage(false));
     }
   });
   console.log(items);
