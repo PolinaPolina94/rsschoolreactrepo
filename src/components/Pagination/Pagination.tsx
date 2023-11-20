@@ -4,9 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 export function Paginator() {
   const [totalItems] = useState(826);
-  const [totalPages] = useState(42);
   const [page, setPage] = useState(1);
-  console.log(totalPages);
   const activeStyle = localStorage.getItem('active');
 
   const pagesCount = Math.ceil(totalItems / 20);

@@ -7,7 +7,6 @@ const SelectorBtn = () => {
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
     const value = event.currentTarget.value;
     localStorage.setItem('countPages', value);
-    console.log('change', value);
     navigate('/page/1');
   };
   const activeStyle = localStorage.getItem('active');

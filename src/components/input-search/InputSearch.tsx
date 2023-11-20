@@ -25,7 +25,6 @@ const InputSearch = () => {
   };
 
   const handleReset = () => {
-    console.log('reset');
     dispatch(personNameReduser(''));
   };
 
