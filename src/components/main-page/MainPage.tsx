@@ -23,7 +23,7 @@ const MainPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (items && name && countPages) {
+    if (items && name) {
       dispatch(personItemsReduser(items));
       dispatch(personNameReduser(name));
     } else {
@@ -31,6 +31,9 @@ const MainPage = () => {
     }
     if (countPages) {
       dispatch(itemsCountReducer(countPages));
+    }
+    if (items && !name) {
+      dispatch(personItemsReduser(items));
     }
   });
   console.log(items);
