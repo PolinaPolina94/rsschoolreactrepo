@@ -1,18 +1,23 @@
 import styles from '@/styles/InputSearch.module.css'
 
+const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  console.log('elements are here')
+}
+
 const InputSearch = () => {   
     return (
-      <form onSubmit={()=>{}}>
+      <form onSubmit={handleFormSubmit}>
         <div className={styles.inputwrapper}>
-          <input type="text" name="name" placeholder="write here a name" onChange={()=>{console.log('skd')}} className={styles.input}/>
+          <input type="text" name="name" placeholder="write here a name" onChange={()=>{console.log('skd')}} className={styles.input} />
           <button type="submit" className={styles.buttonsearch}>
             {' '}
             Search 🔎{' '}
           </button>
-          <button type="submit" onClick={()=>{}} className={styles.buttonsearch}>
+          {/* <button type="submit" onClick={showElement} className={styles.buttonsearch}>
             {' '}
             Reset 👌{' '}
-          </button>
+          </button> */}
           </div>
       </form>
     );

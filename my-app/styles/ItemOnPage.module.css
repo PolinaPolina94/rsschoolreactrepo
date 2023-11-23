@@ -2,9 +2,9 @@
     height:100%;
     }
     
-    .itemsonpagecontainer {
+    /* .itemsonpagecontainer {
       display: flex;
-    }
+    } */
     
     .itemwrapper {
       display: flex;
@@ -43,7 +43,6 @@
     .description {
       width: 30%;
       color: rgb(22, 167, 199);
-      gap:5px;
     }
     
     .descriptionList {

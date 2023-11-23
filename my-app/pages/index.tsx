@@ -9,7 +9,6 @@ import { json } from 'stream/consumers'
 import { Item } from '@/types/types'
 import ListItems from '@/components/ListItems'
 
- 
 type State = {
     error?: string;
     isLoaded?: boolean;
@@ -19,7 +18,7 @@ type State = {
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const result = await fetch('https://rickandmortyapi.com/api/character/?page=1')
   return { 
-    props: {
+    props:  {
     result: await result.json()
   }}
 }
