@@ -1,5 +1,5 @@
-import { Item } from "@/types/types";
-import ItemOnPage from "./ItemOnPage";
+import { Item } from '@/types/types';
+import ItemOnPage from './ItemOnPage';
 
 type Person = {
   items: Item[];
@@ -7,7 +7,7 @@ type Person = {
 
 const ListItems = (props: Person) => {
   const items = props.items;
-  if (items.length) {
+  if (items && items.length) {
     return (
       <>
         {items.map((el: Item) => (

@@ -31,7 +31,19 @@
   border: 2px solid #69b7eb;
 }
 
-
+.notfound {
+  width: 120px;
+  margin: 0 auto;
+  margin-top: 50px;
+  color: rgb(178, 96, 207);
+  font-weight: 600;
+  font-size: 18px;
+  background:white;
+  border-radius: 10px;
+  width:200px;
+  height:30px;
+  opacity: 0.8;
+}
 /* Enable hover only on non-touch devices */
 /* @media (hover: hover) and (pointer: fine) {
   .card:hover {

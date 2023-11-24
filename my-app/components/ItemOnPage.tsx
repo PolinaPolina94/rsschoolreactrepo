@@ -7,13 +7,15 @@ const ItemOnPage = (props: Item) => {
     <div id={'itemPerson'} className={styles.itemwrapper}>
       <div className={styles.view}>
         <span> {props.name} </span>
-        <Link
-          href={`details/${props.id}`}
-          role="img"
-          className={styles.link}
-        >
-          <Image src={props.image} alt="person photo" id="rockNew" width={100}
-                height={100} className={styles.itemimg}></Image>
+        <Link href={`details/${props.id}`} role="img" className={styles.link}>
+          <Image
+            src={props.image}
+            alt="person photo"
+            id="rockNew"
+            width={100}
+            height={100}
+            className={styles.itemimg}
+          ></Image>
         </Link>
       </div>
       <div className={styles.description}>

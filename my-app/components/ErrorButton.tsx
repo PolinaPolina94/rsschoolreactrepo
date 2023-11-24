@@ -1,24 +1,26 @@
-import styles from '@/styles/ErrorButton.module.css';
-import { FormEvent } from 'react';
+import { useState } from 'react';
+import styles from '../styles/ErrorButton.module.css';
 
 const ErrorButton = () => {
-  const handleErrorSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    console.log('error btn');
+  const [hasError, sethasError] = useState(true);
+
+  const handleErrorSubmit = () => {
+    sethasError(false);
   };
+  if (hasError) {
     return (
       <>
         <form onSubmit={handleErrorSubmit}>
-          <button
-            className={styles.button}
-            type="submit"
-          >
+          <button className={styles.button} type="submit">
             {' '}
             Error Button ♻{' '}
           </button>
         </form>
       </>
     );
+  } else {
+    throw new Error('Sorry...error');
+  }
 };
 
 export default ErrorButton;

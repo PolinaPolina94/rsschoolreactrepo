@@ -41,6 +41,10 @@ export type StateRedux = {
   countItems: number;
 };
 
+export type Data = {
+  data: Item[];
+};
+
 export type InputValue = {
   value: string;
 };
