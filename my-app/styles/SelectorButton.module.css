@@ -1,0 +1,23 @@
+.btncontainer {
+    width:150px;
+    margin: auto;
+}
+
+.buttonbtn {
+    border-radius: 20px;
+    background-color: aquamarine;
+    color: blueviolet;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid #69b7eb;
+    margin-top:15px;
+    margin-bottom:15px;
+  }
+
+.buttonbtn.disabled {
+      pointer-events: none;
+  }
+
+.buttonbtn .option {
+    font-weight: bold;
+  }

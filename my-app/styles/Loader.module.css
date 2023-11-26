@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40vh;
+    margin: auto;
+    background-color: none;
+  }
+  
+  .loader {
+    max-width: 10rem;
+    width: 100%;
+    height: auto;
+    stroke-linecap: round;
+  }
+  
+  .circle {
+    fill: none;
+    stroke-width: 5.5;
+    animation-name: preloader;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    transform-origin: 150px 170px;
+    will-change: transform;
+  }
+  
+    .circle:nth-of-type(1) {
+      stroke-dasharray: 550px;
+    }
+  
+    .circle:nth-of-type(2) {
+      stroke-dasharray: 500px;
+    }
+  
+    .circle:nth-of-type(3) {
+      stroke-dasharray: 450px;
+    }
+  
+    .circle:nth-of-type(4) {
+      stroke-dasharray: 300px;
+    }
+  
+  
+  @keyframes preloader {
+    20% {
+      transform: rotate(360deg);
+    }
+  }

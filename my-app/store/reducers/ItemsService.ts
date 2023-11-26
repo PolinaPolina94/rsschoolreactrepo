@@ -18,17 +18,19 @@ type Transform = {
 
 export const itemsAPI = createApi({
   reducerPath: 'itemsAPI',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://rickandmortyapi.com/api/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://rickandmortyapi.com/api/character/' }),
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {
       return action.payload[reducerPath];
     }
   },
   endpoints: (builder) => ({
-    fetchAllItems: builder.query<Transform, string | undefined>({
-      query: (name: string = '') => {
-        // const personName = localStorage.getItem('personName');
-        return `character/?page=1&name=${name}`;
+    fetchAllItems: builder.query<Transform, { page: number; name: string }>({
+      query: ({ page = 1, name = ' ' }) => {
+        if (name === 'undefined') {
+          name = ' ';
+        }
+        return `?page=${page}&name=${name}`;
       },
       transformResponse: (response: API) => {
         const data = response.results;
@@ -45,5 +47,4 @@ export const {
   util: { getRunningQueriesThunk },
 } = itemsAPI;
 
-// export endpoints for use in SSR
 export const { fetchAllItems } = itemsAPI.endpoints;

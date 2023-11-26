@@ -9,7 +9,7 @@ const ErrorPageNavigation: React.FC = () => {
       <p className={styles.text}>Sorry, we dont have information about it.</p>
       <h2 className={styles.h1}>404 error</h2>
       <Link href={'/'}>
-        <button className={styles.button}> Go back </button>
+        <div className={styles.reset}> Click, to return </div>
       </Link>
     </div>
   );

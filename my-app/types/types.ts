@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 export type Item = {
-  id?: number;
+  id: number;
   name: string;
   image: string;
   status?: string;
