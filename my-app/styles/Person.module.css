@@ -1,0 +1,93 @@
+.wrapper {
+    background: white;
+    max-width: 500px;
+    height:350px;
+    margin: 0 auto;
+    border-radius:20px;
+    box-shadow: 0 0 0 9999px rgba(0,0,0, 0.3);
+    
+}
+
+.personName {
+    text-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+.img {
+    border-radius: 5%;
+    box-shadow: 10px 5px 4px gray;
+    width: 200px;
+}
+
+.container img {
+    padding-left: 10px
+}
+
+.img:hover {
+     transform: scale(0.9);
+}
+
+.details {
+    font-size: 16px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width:500px;
+    margin: auto;
+}
+
+.headerItem {
+    width:500px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    text-content: center;
+    justify-content: start;
+}
+
+.id {
+    font-size: 15px;
+    color: blue;
+    text-shadow: 0 0 1em green, 0 0 0.2em blue;
+    margin-left: 20px;
+    font-weight: bold;
+    border-radius: 3px;
+    height: 20px
+}
+
+.more {
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+    padding-right: 10px
+}
+
+.details {
+    color: red;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue
+}
+
+.created {
+    color: black;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.button {
+    margin-left: 15px;
+    border-radius: 50%;
+    border: 3px solid grey;
+    width:25px;
+    height: 25px;
+    cursor: pointer;
+    background: none;
+    color: black;
+}
+
+
+.loaderdetails {
+    width: 300px;
+}

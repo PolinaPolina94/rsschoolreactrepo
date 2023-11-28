@@ -1,0 +1,108 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap:10px;
+  /* position: relative; */
+}
+
+.active {
+  position: sticky;
+  height:100vh;
+  top: 150px;
+  right:15px;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  max-width: 1000px; 
+  flex-wrap: wrap;
+  gap:10px;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.buttonsearch {
+  border-radius: 20px;
+  background-color: aquamarine;
+  color: blueviolet;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid #69b7eb;
+}
+
+.notfound {
+  width: 120px;
+  color: rgb(178, 96, 207);
+  font-weight: 600;
+  font-size: 18px;
+  background:white;
+  border-radius: 10px;
+  height:30px;
+  opacity: 0.8;
+  padding-left: 10px;
+}
+
+/* Enable hover only on non-touch devices */
+/* @media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    background: rgba(var(--card-rgb), 0.1);
+    border: 1px solid rgba(var(--card-border-rgb), 0.15);
+  }
+
+  .card:hover span {
+    transform: translateX(4px);
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .card:hover span {
+    transform: none;
+  }
+} */
+
+/* Mobile */
+  /* .grid {
+    grid-template-columns: 1fr;
+    margin-bottom: 120px;
+    max-width: 320px;
+    text-align: center;
+  } */
+
+
+/* Tablet and Smaller Desktop */
+/* @media (min-width: 701px) and (max-width: 1120px) {
+  .grid {
+    grid-template-columns: repeat(2, 50%);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .vercelLogo {
+    filter: invert(1);
+  } */
+
+  /* .logo {
+    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+  }
+} */
+
+/* @keyframes rotate {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+} */

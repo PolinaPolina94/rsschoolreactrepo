@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 15px;
+    gap: 30px;
+    align-items: center;
+    text-content: center;
+}
+
+.a {
+    border: 2px solid #ffd4ac;
+    width:20px;
+    height:20px;
+    border-radius: 50%;
+    text-align: center;
+    background: #fffc8c;
+    color: brown;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.a:active {
+    opacity: 0.4
+}
+
+.a:hover {
+    opacity: 0.4
+}
