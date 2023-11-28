@@ -26,15 +26,8 @@ export const gsspCtx = (
   ...context,
 });
 
-// export function assertHasProps<T>(res: GetServerSidePropsResult<T>): asserts res is { props: T } {
-//   const hasProps = typeof res === 'object' && res['props'] && typeof res.props === 'object';
-//   if (!hasProps) throw new Error('no props');
-// }
 export function assertHasProps<T>(res: GetServerSidePropsResult<T>): asserts res is { props: T } {
   const hasProps = typeof res === 'object';
-  // &&
-  //   res['props' as any] &&
-  //   typeof (res as { redirect: Redirect }).props === 'object';
   if (!hasProps) throw new Error('no props');
 }
 
