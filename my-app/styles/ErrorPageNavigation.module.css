@@ -12,6 +12,18 @@
     border-radius: 20px;
   }
    
+  .error {
+    color: #f0768b;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 15px;
+    }
+  
+  .errorspan {
+    font-size: 20px;
+    color: #5e78ed;
+  }
+
   .reset {
     color: green;
     font-weight: 600;

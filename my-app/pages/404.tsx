@@ -11,6 +11,10 @@ const ErrorPageNavigation: React.FC = () => {
       <Link href={'/'}>
         <div className={styles.reset}> Click, to return </div>
       </Link>
+      <div className={styles.error}>
+        {' '}
+        If you called <span className={styles.errorspan}>`Throw Error`</span> ➡ reset the page{' '}
+      </div>
     </div>
   );
 };
