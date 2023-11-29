@@ -1,0 +1,32 @@
+.input {
+ width: 300px;
+ height: 30px;
+ margin-bottom: 10px;
+ border-radius: 10px;
+ border: 3px solid violet;
+ padding-left: 15px
+}
+
+.inputsex {
+  width: 50px;
+  margin-bottom: 25px;
+}
+
+.inputphoto {
+    border: none;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.inputagree {
+    width: 20px;
+    margin-bottom: 25px;
+}
+
+.inputsubmit {
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    border: 3px solid violet;
+    cursor: pointer;
+}
