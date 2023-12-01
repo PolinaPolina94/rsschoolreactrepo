@@ -25,34 +25,34 @@ const initialState: IUser = {
 };
 
 export const UserSliceForm2 = createSlice({
-  name: "userinfo1",
+  name: "userinfo",
   initialState,
   reducers: {
-    username(state, action: PayloadAction<string>) {
+    username2(state, action: PayloadAction<string>) {
       state.name = action.payload;
     },
-    userage(state, action: PayloadAction<number | null>) {
+    userage2(state, action: PayloadAction<number | null>) {
       state.age = action.payload;
     },
-    useremail(state, action: PayloadAction<string>) {
+    useremail2(state, action: PayloadAction<string>) {
       state.email = action.payload;
     },
-    userpassword1(state, action: PayloadAction<string>) {
+    userpassword11(state, action: PayloadAction<string>) {
       state.password1 = action.payload;
     },
-    userpassword2(state, action: PayloadAction<string>) {
+    userpassword22(state, action: PayloadAction<string>) {
       state.password2 = action.payload;
     },
-    usersex(state, action: PayloadAction<string>) {
+    usersex2(state, action: PayloadAction<string>) {
       state.sex = action.payload;
     },
-    useracception(state, action: PayloadAction<boolean>) {
+    useracception2(state, action: PayloadAction<boolean>) {
       state.acception = action.payload;
     },
-    userphoto(state, action: PayloadAction<string>) {
+    userphoto2(state, action: PayloadAction<string>) {
       state.photo = action.payload;
     },
-    usercountries(state, action: PayloadAction<string[]>) {
+    usercountries2(state, action: PayloadAction<string[]>) {
       state.countries = action.payload;
     },
   },

@@ -1,30 +1,134 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import styles from "../UncontroledForm/UncontrolledForm.module.css";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { UserSliceForm2 } from "../store/reducers/UserSliceForm2";
+import { useAppDispatch } from "../hooks/hooksforredux";
 
 type Inputs = {
   name: string;
-  age: string;
+  age: number;
   email: string;
-  password: string;
-  gender: string;
+  password1: string;
+  password2: string;
+  sex: string;
+  photo?: string | undefined;
   country: string;
-  checkbox: string;
+  checkbox: boolean;
 };
+
+const schema = yup
+  .object()
+  .shape({
+    name: yup
+      .string()
+      .required("This field is required")
+      .matches(/^[A-Z][a-z]+$/, "Первая буква латинская заглавная"),
+    age: yup
+      .number()
+      .positive("number should be upper 0")
+      .integer()
+      .required("This field is required"),
+    email: yup
+      .string()
+      .email("email should be correct")
+      .required("This field is required"),
+    password1: yup
+      .string()
+      .required("This field is required")
+      .matches(
+        /[\.:,;\?!@#\$%\^&\*_\-\+=]/,
+        "Пароль должен содержать хотя бы один спецсимвол ('.:,;?!@#$%^&*_-+=')!",
+      )
+      .matches(
+        /[A-Z]/,
+        "Пароль должен содержать хотя бы одну латинскую заглавную букву!",
+      )
+      .matches(
+        /[a-z]/,
+        "Пароль должен содержать хотя бы одну строчную заглавную букву!",
+      )
+      .matches(/\d/, "Пароль должен содержать хотя бы одну цифру!"),
+    password2: yup
+      .string()
+      .required("This field is required")
+      .matches(
+        /[\.:,;\?!@#\$%\^&\*_\-\+=]/,
+        "Пароль должен содержать хотя бы один спецсимвол ('.:,;?!@#$%^&*_-+=')!",
+      )
+      .matches(
+        /[A-Z]/,
+        "Пароль должен содержать хотя бы одну латинскую заглавную букву!",
+      )
+      .matches(
+        /[a-z]/,
+        "Пароль должен содержать хотя бы одну строчную заглавную букву!",
+      )
+      .matches(/\d/, "Пароль должен содержать хотя бы одну цифру!"),
+    sex: yup.string().required("This field is required"),
+    photo: yup.string(),
+    country: yup.string().required("This field is required"),
+    checkbox: yup.boolean().required("This field is required"),
+  })
+  .required();
 
 function ReactHookForm() {
   const {
     register,
     handleSubmit,
-    // watch,
     formState: { errors, isValid },
   } = useForm<Inputs>({
+    resolver: yupResolver(schema),
     mode: "onBlur",
   });
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
-  //   console.log(watch("n")); // watch input value by passing the name of it
+  const {
+    username2,
+    userage2,
+    useremail2,
+    userpassword11,
+    userpassword22,
+    usersex2,
+    userphoto2,
+    useracception2,
+    usercountries2,
+  } = UserSliceForm2.actions;
+  const dispatch = useAppDispatch();
 
+  const onSubmit: SubmitHandler<Inputs> = ({
+    name,
+    age,
+    email,
+    password1,
+    password2,
+    sex,
+    country,
+    photo,
+    checkbox,
+  }) => {
+    if (
+      name &&
+      age &&
+      email &&
+      password1 &&
+      password2 &&
+      sex &&
+      photo &&
+      checkbox &&
+      country
+    ) {
+      dispatch(username2(name.toString()));
+      dispatch(userage2(age));
+      dispatch(useremail2(email.toString()));
+      dispatch(userpassword11(password1.toString()));
+      dispatch(userpassword22(password2.toString()));
+      dispatch(usersex2(sex.toString()));
+      dispatch(userphoto2(photo));
+      dispatch(useracception2(checkbox));
+      dispatch(usercountries2([country]));
+    }
+  };
   return (
     <div className="container">
       <NavLink to={"/"}> return to main </NavLink>
@@ -36,76 +140,84 @@ function ReactHookForm() {
             <input
               className={styles.input}
               placeholder="name"
-              {...register("name", { required: true })}
+              {...register("name")}
               type="text"
               id="username"
+              name="name"
             />
-            <div>{errors.name && <span>This field is required</span>}</div>
+            <div>{errors.name && <span> {errors.name.message} </span>}</div>
           </div>
           <div>
             <label htmlFor="userage"></label>
             <input
               className={styles.input}
-              {...register("age", { required: true })}
+              {...register("age")}
               type="number"
               id="userage"
               placeholder="age"
+              name="age"
             />
-            <div>{errors.name && <span>This field is required</span>}</div>
+            <div>{errors.age && <span> {errors.age.message} </span>}</div>
           </div>
           <div>
             <label htmlFor="useremail"></label>
             <input
               className={styles.input}
-              //   defaultValue="email"
               placeholder="email"
-              {...register("email", { required: true })}
+              {...register("email")}
               type="email"
               id="useremail"
+              name="email"
             />
-            <div>{errors.name && <span>This field is required</span>}</div>
+            <div>{errors.email && <span> {errors.email.message} </span>}</div>
           </div>
           <div>
             <label htmlFor="password1"></label>
             <input
               className={styles.input}
-              //   type="password"
-              {...register("password", { required: true })}
-              //   defaultValue="password"
+              {...register("password1")}
               placeholder="password1"
               id="password1"
+              name="password1"
             />
-            <div>{errors.name && <span>This field is required</span>}</div>
+            <div>
+              {errors.password1 && <span> {errors.password1.message} </span>}
+            </div>
           </div>
           <div>
             <label htmlFor="password2"></label>
             <input
               className={styles.input}
-              // type="password"
-              //   defaultValue="password"
-              {...register("password", { required: true })}
+              {...register("password2")}
               id="password1"
               placeholder="password2"
+              name="password2"
             />
-            <div>{errors.name && <span>This field is required</span>}</div>
+            <div>
+              {errors.password2 && <span> {errors.password2.message} </span>}
+            </div>
           </div>
           <div>
             <input
               className={styles.inputsex}
               type="radio"
               id="female"
-              name="sex"
               value="female"
+              {...register("sex")}
+              name="sex"
             />
             <label htmlFor="female">female 👩🏻</label>
+            <span>{errors.sex && <span> {errors.sex.message} </span>}</span>
             <input
               className={styles.inputsex}
               type="radio"
               id="male"
-              name="sex"
               value="male"
+              {...register("sex")}
+              name="sex"
             />
             <label htmlFor="male">male 👨🏻</label>
+            <span>{errors.sex && <span> {errors.sex.message} </span>}</span>
           </div>
           <div>
             <datalist id="countrydata">
@@ -1338,12 +1450,11 @@ function ReactHookForm() {
               type="text"
               list="countrydata"
               id="country"
-              //   name="country"
-              //   size="50"
               autoComplete="off"
-              {...register("country", { required: true })}
+              {...register("country")}
+              name="country"
             />
-            {errors.country && <span>This field is required</span>}
+            {errors.country && <span> {errors.country.message} </span>}
           </div>
           <div>
             <label htmlFor="photo">choose a photo (jpeg/png)</label> <br></br>
@@ -1359,23 +1470,20 @@ function ReactHookForm() {
             <input
               className={styles.inputagree}
               type="checkbox"
-              //   defaultValue="password"
-              {...register("checkbox", { required: true })}
+              {...register("checkbox")}
               id="checkbox"
+              name="checkbox"
             />
             <label htmlFor="checkbox">
               By checking this box, I agree with Terms and Conditions.
             </label>
-            <div>{errors.name && <span>This field is required</span>}</div>
+            <div>
+              {errors.checkbox && <span> {errors.checkbox.message} </span>}
+            </div>
           </div>
-          <button
-            type="submit"
-            className={styles.inputsubmit}
-            disabled={!isValid}
-          >
-            {" "}
-            Submit
-          </button>
+          {/* <NavLink to={"/"}> */}
+          <input type="submit" disabled={!isValid} />
+          {/* </NavLink> */}
         </form>
       </section>
     </div>
