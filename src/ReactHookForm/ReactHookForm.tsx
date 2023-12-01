@@ -1,217 +1,93 @@
+import { useForm, SubmitHandler } from "react-hook-form";
 import { NavLink } from "react-router-dom";
-import styles from "./UncontrolledForm.module.css";
-import { useAppDispatch } from "../hooks/hooksforredux";
-import { UserSliceForm1 } from "../store/reducers/UserSliceForm1";
-import { useState } from "react";
+import styles from "../UncontroledForm/UncontrolledForm.module.css";
 
-let userName: string;
-let userAge: number | null;
-let userEmail: string;
-let userPassword1: string;
-let userPassword2: string;
-let userSex: string;
-let userPhoto: string;
-let userAcception: boolean;
-let userCountry: string;
+type Inputs = {
+  name: string;
+  age: string;
+  email: string;
+  password: string;
+  gender: string;
+  country: string;
+  checkbox: string;
+};
 
-function UncontrolledForm() {
-  const [error, setError] = useState("");
-  const [errorName, setErrorName] = useState("");
-
-  const checkPassword1 = (password: string) => {
-    if (!/[A-Z]/.test(password)) {
-      setError(
-        "Пароль должен содержать хотя бы одну латинскую заглавную букву!",
-      );
-    }
-    if (!/[a-z]/.test(password)) {
-      setError(
-        "Пароль должен содержать хотя бы одну латинскую строчную букву!",
-      );
-    }
-    if (!/\d/.test(password)) {
-      setError("Пароль должен содержать хотя бы одну цифру!");
-    }
-    if (!/[\.:,;\?!@#\$%\^&\*_\-\+=]/.test(password)) {
-      setError(
-        "Пароль должен содержать хотя бы один спецсимвол ('.:,;?!@#$%^&*_-+=')!",
-      );
-    }
-    if (
-      /[A-Z]/.test(password) &&
-      /[a-z]/.test(password) &&
-      /\d/.test(password) &&
-      /[\.:,;\?!@#\$%\^&\*_\-\+=]/.test(password)
-    ) {
-      setError("");
-    }
-  };
-
-  const checkName = (name: string) => {
-    if (name[0] === name[0].toLowerCase()) {
-      console.log(name);
-      setErrorName("Имя должно начинаться с заглавной буквы!");
-    } else {
-      setErrorName("");
-    }
-  };
-
-  const handleChangeName = (event: React.FormEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value;
-    userName = value;
-  };
-  const handleChangeAge = (event: React.FormEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value;
-    userAge = Number(value);
-  };
-  const handleChangeEmail = (event: React.FormEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value;
-    userEmail = value;
-  };
-
-  const { userpassword1, userpassword2 } = UserSliceForm1.actions;
-
-  const handleChangePassword1 = (event: React.FormEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value;
-    userPassword1 = value;
-    dispatch(userpassword1(userPassword1.toString()));
-  };
-  const handleChangePassword2 = (event: React.FormEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value;
-    if (value === userPassword1) {
-      userPassword2 = value;
-      dispatch(userpassword2(userPassword2.toString()));
-    }
-  };
-  const handleChangeSex = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      const value = e.target.defaultValue;
-      userSex = value;
-    }
-  };
-  const handleChangePhoto = (event: React.FormEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value;
-    userPhoto = btoa(value);
-    console.log(userPhoto);
-  };
-  const handleChangeAcception = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const value = event.target.checked;
-    userAcception = value;
-  };
-  const handleChangeCountry = (event: React.FormEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value;
-    userCountry = value;
-    console.log(value);
-  };
-
+function ReactHookForm() {
   const {
-    username,
-    userage,
-    useremail,
-    // userpassword1,
-    // userpassword2,
-    usersex,
-    userphoto,
-    useracception,
-    usercountries,
-  } = UserSliceForm1.actions;
-  const dispatch = useAppDispatch();
+    register,
+    handleSubmit,
+    // watch,
+    formState: { errors, isValid },
+  } = useForm<Inputs>({
+    mode: "onBlur",
+  });
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    checkName(userName);
-    checkPassword1(userPassword1);
-    if (userPassword2 !== userPassword1) {
-      setError("Пароли должны совпадать!");
-    }
-    if (
-      userName &&
-      userAge &&
-      userEmail &&
-      // userpassword1 &&
-      // userpassword2 &&
-      usersex &&
-      userphoto &&
-      useracception &&
-      usercountries
-    ) {
-      dispatch(username(userName.toString()));
-      dispatch(userage(userAge));
-      dispatch(useremail(userEmail.toString()));
-      // dispatch(userpassword1(userPassword1.toString()));
-      // dispatch(userpassword2(userPassword2.toString()));
-      dispatch(usersex(userSex.toString()));
-      dispatch(userphoto(userPhoto));
-      dispatch(useracception(userAcception));
-      dispatch(usercountries([userCountry]));
-    }
-  };
+  //   console.log(watch("n")); // watch input value by passing the name of it
 
   return (
     <div className="container">
       <NavLink to={"/"}> return to main </NavLink>
       <section id="content">
-        <form action="" onSubmit={handleFormSubmit} className={styles.form}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <h1>Form</h1>
           <div>
             <label htmlFor="username"></label>
             <input
               className={styles.input}
-              type="text"
               placeholder="name"
-              required
+              {...register("name", { required: true })}
+              type="text"
               id="username"
-              onChange={handleChangeName}
             />
-            <div className={styles.forerror}>{errorName}</div>
+            <div>{errors.name && <span>This field is required</span>}</div>
           </div>
           <div>
             <label htmlFor="userage"></label>
             <input
               className={styles.input}
+              {...register("age", { required: true })}
               type="number"
-              placeholder="age"
-              required
               id="userage"
-              min="1"
-              onChange={handleChangeAge}
+              placeholder="age"
             />
+            <div>{errors.name && <span>This field is required</span>}</div>
           </div>
           <div>
             <label htmlFor="useremail"></label>
             <input
               className={styles.input}
-              type="email"
+              //   defaultValue="email"
               placeholder="email"
-              required
+              {...register("email", { required: true })}
+              type="email"
               id="useremail"
-              onChange={handleChangeEmail}
             />
+            <div>{errors.name && <span>This field is required</span>}</div>
           </div>
           <div>
-            <label htmlFor="password"></label>
+            <label htmlFor="password1"></label>
             <input
               className={styles.input}
-              // type="password"
+              //   type="password"
+              {...register("password", { required: true })}
+              //   defaultValue="password"
               placeholder="password1"
-              required
               id="password1"
-              onChange={handleChangePassword1}
             />
-            <div> {error} </div>
+            <div>{errors.name && <span>This field is required</span>}</div>
           </div>
           <div>
-            <label htmlFor="password"></label>
+            <label htmlFor="password2"></label>
             <input
               className={styles.input}
               // type="password"
+              //   defaultValue="password"
+              {...register("password", { required: true })}
+              id="password1"
               placeholder="password2"
-              required
-              id="password2"
-              onChange={handleChangePassword2}
             />
+            <div>{errors.name && <span>This field is required</span>}</div>
           </div>
           <div>
             <input
@@ -220,7 +96,6 @@ function UncontrolledForm() {
               id="female"
               name="sex"
               value="female"
-              onChange={handleChangeSex}
             />
             <label htmlFor="female">female 👩🏻</label>
             <input
@@ -229,7 +104,6 @@ function UncontrolledForm() {
               id="male"
               name="sex"
               value="male"
-              onChange={handleChangeSex}
             />
             <label htmlFor="male">male 👨🏻</label>
           </div>
@@ -1464,12 +1338,12 @@ function UncontrolledForm() {
               type="text"
               list="countrydata"
               id="country"
-              name="country"
+              //   name="country"
               //   size="50"
               autoComplete="off"
-              required
-              onChange={handleChangeCountry}
+              {...register("country", { required: true })}
             />
+            {errors.country && <span>This field is required</span>}
           </div>
           <div>
             <label htmlFor="photo">choose a photo (jpeg/png)</label> <br></br>
@@ -1479,33 +1353,33 @@ function UncontrolledForm() {
               name="photo"
               accept="image/jpeg,image/png"
               id="photo"
-              onChange={handleChangePhoto}
             />
           </div>
           <div>
             <input
               className={styles.inputagree}
               type="checkbox"
+              //   defaultValue="password"
+              {...register("checkbox", { required: true })}
               id="checkbox"
-              name="checkbox"
-              value="checkbox"
-              required
-              onChange={handleChangeAcception}
             />
             <label htmlFor="checkbox">
-              {" "}
-              By checking this box, I agree with Terms and Conditions.{" "}
+              By checking this box, I agree with Terms and Conditions.
             </label>
+            <div>{errors.name && <span>This field is required</span>}</div>
           </div>
-          <div>
-            <button className={styles.inputsubmit} type="submit">
-              Submit
-            </button>
-            {/* <a href="#">Lost your password?</a> */}
-          </div>
+          <button
+            type="submit"
+            className={styles.inputsubmit}
+            disabled={!isValid}
+          >
+            {" "}
+            Submit
+          </button>
         </form>
       </section>
     </div>
   );
 }
-export default UncontrolledForm;
+
+export default ReactHookForm;
