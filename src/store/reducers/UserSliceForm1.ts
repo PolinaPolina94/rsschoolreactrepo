@@ -4,8 +4,8 @@ type IUser = {
   name: string;
   age: number | null;
   email: string;
-  password1: string;
-  password2: string;
+  password1: string | null;
+  password2: string | null;
   sex: string;
   acception: boolean;
   photo: string;

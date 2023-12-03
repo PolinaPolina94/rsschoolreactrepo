@@ -8,7 +8,7 @@ type IUser = {
   password2: string;
   sex: string;
   acception: boolean;
-  photo: string;
+  photo: string | undefined;
   countries: string[];
 };
 
@@ -25,7 +25,7 @@ const initialState: IUser = {
 };
 
 export const UserSliceForm2 = createSlice({
-  name: "userinfo",
+  name: "userinfo1",
   initialState,
   reducers: {
     username2(state, action: PayloadAction<string>) {
