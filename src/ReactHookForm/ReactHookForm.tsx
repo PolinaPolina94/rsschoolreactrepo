@@ -14,7 +14,7 @@ type Inputs = {
   password1: string;
   password2: string;
   sex: string;
-  photo?: string | undefined;
+  photo: object;
   country: string;
   checkbox: boolean;
 };
@@ -69,7 +69,31 @@ const schema = yup
       .matches(/\d/, "The password must contain at least one number!")
       .oneOf([yup.ref("password1")], "Passwords are mismatched"),
     sex: yup.string().required("This field is required"),
-    photo: yup.string(),
+    photo: yup
+      .mixed()
+      .required("You need to provide a file")
+      .test({
+        name: "fileFormat",
+        message: "Unsupported file format",
+        test: (value) => {
+          if (value && value instanceof FileList) {
+            const supportedFormats = ["image/png", "image/jpeg", "image/jpg"];
+            return supportedFormats.includes(value[0]?.type);
+          }
+          return true;
+        },
+      })
+      .test({
+        name: "fileSize",
+        message: "File size is too large",
+        test: (value) => {
+          if (value && value instanceof FileList) {
+            const maxSize = 2 * 1024 * 1024;
+            return value[0]?.size <= maxSize;
+          }
+          return true;
+        },
+      }),
     country: yup.string().required("This field is required"),
     checkbox: yup
       .boolean()
@@ -131,9 +155,17 @@ function ReactHookForm() {
       dispatch(userpassword11(password1.toString()));
       dispatch(userpassword22(password2.toString()));
       dispatch(usersex2(sex.toString()));
-      dispatch(userphoto2(photo.toString()));
       dispatch(useracception2(checkbox));
       dispatch(usercountries2([country]));
+    }
+    const picture = photo as unknown as FileList;
+    if (picture) {
+      const image = new FileReader();
+      image.onloadend = () => {
+        const base64String = image.result as string;
+        dispatch(userphoto2(base64String));
+      };
+      image.readAsDataURL(picture[0]);
     }
     navigate("/");
   };

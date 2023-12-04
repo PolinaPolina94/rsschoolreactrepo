@@ -8,7 +8,7 @@ type IUser = {
   password2: string;
   sex: string;
   acception: boolean;
-  photo: string | undefined;
+  photo: string | null;
   countries: string[];
 };
 
@@ -20,7 +20,7 @@ const initialState: IUser = {
   password2: "",
   sex: "",
   acception: true,
-  photo: "",
+  photo: null,
   countries: [],
 };
 

@@ -8,7 +8,7 @@ import Autocomplete from "../AutocompleteSelect/Autocomplite";
 
 function UncontrolledForm() {
   const navigate = useNavigate();
-  const [button, setbutton] = useState("submit");
+  const [button, setbutton] = useState("disabled");
   const [errorName, setErrorName] = useState({
     name: "",
     age: "",
@@ -20,7 +20,7 @@ function UncontrolledForm() {
     checkbox: false,
     photo: "",
   });
-  type ErrorMessagesFields =
+  type ErrorMessages =
     | "name"
     | "age"
     | "email"
@@ -97,7 +97,31 @@ function UncontrolledForm() {
         .matches(/\d/, "The password must contain at least one number!")
         .oneOf([yup.ref("password1")], "Passwords are mismatched"),
       sex: yup.string().required("This field is required"),
-      photo: yup.string().required("This field is required"),
+      photo: yup
+        .mixed()
+        .required("You need to provide a file")
+        .test({
+          name: "fileFormat",
+          message: "Unsupported file format",
+          test: (value) => {
+            if (value && value instanceof FileList) {
+              const supportedFormats = ["image/png", "image/jpeg", "image/jpg"];
+              return supportedFormats.includes(value[0]?.type);
+            }
+            return true;
+          },
+        })
+        .test({
+          name: "fileSize",
+          message: "File size is too large",
+          test: (value) => {
+            if (value && value instanceof FileList) {
+              const maxSize = 2 * 1024 * 1024;
+              return value[0]?.size <= maxSize;
+            }
+            return true;
+          },
+        }),
       country: yup.string().required("This country field is required"),
       checkbox: yup
         .boolean()
@@ -113,20 +137,28 @@ function UncontrolledForm() {
     password1: "",
     password2: "",
     sex: "",
-    photo: "",
+    photo: [],
     country: "",
     checkbox: false,
   });
 
-  function handleChange(key: string, val: string | number | boolean) {
+  function handleChange(key: string, val: string | number | boolean | object) {
     setUsertInfo({ ...userInfo, [key]: val });
     setbutton("submit");
   }
-  function errorChange(
-    key: ErrorMessagesFields[],
-    val: string | number | boolean,
-  ) {
+  function errorChange(key: ErrorMessages[], val: string | number | boolean) {
     setErrorName({ ...errorName, [key as unknown as string]: val });
+  }
+  function photoChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { files } = e.target;
+    const file = new FileReader();
+    if (files && files[0]) {
+      file.readAsDataURL(files[0]);
+      file.onload = () => {
+        dispatch(userphoto(file.result as string));
+      };
+    }
+    handleChange("photo", e.target.value);
   }
 
   async function validateValues(e: React.FormEvent) {
@@ -144,6 +176,7 @@ function UncontrolledForm() {
         checkbox: true,
         photo: "",
       });
+
       if (
         userInfo.name &&
         userInfo.age &&
@@ -160,18 +193,16 @@ function UncontrolledForm() {
         dispatch(userpassword1(userInfo.password1.toString()));
         dispatch(userpassword2(userInfo.password2.toString()));
         dispatch(usersex(userInfo.sex.toString()));
-        dispatch(userphoto(userInfo.photo));
         dispatch(useracception(userInfo.checkbox));
         dispatch(usercountries([userInfo.country]));
       }
       navigate("/");
     } catch (error) {
       const errorCur = error as unknown as yup.ValidationError;
-      errorChange([errorCur.path as ErrorMessagesFields], errorCur.message);
+      errorChange([errorCur.path as ErrorMessages], errorCur.message);
       setbutton("disabled");
     }
   }
-
   return (
     <div className="container">
       <NavLink to={"/"}> return to main </NavLink>
@@ -288,9 +319,7 @@ function UncontrolledForm() {
               accept="image/jpeg,image/png"
               id="photo"
               value={userInfo.photo}
-              onChange={(e) => {
-                handleChange("photo", e.currentTarget.value);
-              }}
+              onChange={photoChange}
             />
             <div className={styles.error}>{errorName.photo}</div>
           </div>

@@ -8,7 +8,7 @@ type IUser = {
   password2: string | null;
   sex: string;
   acception: boolean;
-  photo: string;
+  photo: string | null;
   countries: string[];
 };
 

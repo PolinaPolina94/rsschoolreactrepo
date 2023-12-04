@@ -26,7 +26,7 @@ const UncontroledFormData = () => {
             Gender is: <span className={styles.trade}> {sex} </span>
           </p>
           <div className={styles.photo}>
-            <img src={photo} alt="user photo" />{" "}
+            <img src={photo || ""} alt="user photo" className={styles.src} />{" "}
           </div>
           <p className={styles.line}>
             Country is: <span className={styles.trade}> {countries} </span>{" "}
