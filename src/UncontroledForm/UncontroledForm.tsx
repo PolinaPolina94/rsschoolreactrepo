@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { UserSliceForm1 } from "../store/reducers/UserSliceForm1";
 import { useAppDispatch } from "../hooks/hooksforredux";
 import Autocomplete from "../AutocompleteSelect/Autocomplite";
+import { ErrorMessages } from "../utils/type";
 
 function UncontrolledForm() {
   const navigate = useNavigate();
@@ -20,16 +21,7 @@ function UncontrolledForm() {
     checkbox: false,
     photo: "",
   });
-  type ErrorMessages =
-    | "name"
-    | "age"
-    | "email"
-    | "password1"
-    | "password2"
-    | "country"
-    | "sex"
-    | "checkbox"
-    | "photo";
+
   const {
     username,
     userage,
@@ -66,7 +58,6 @@ function UncontrolledForm() {
       password1: yup
         .string()
         .required("This password1 field is required")
-        .test("len", "little password", (val) => val.toString().length < 5)
         .matches(
           /[\.:,;\?!@#\$%\^&\*_\-\+=]/,
           "The password must contain at least one special character ('.:,;?!@#$%^&*_-+=')!",

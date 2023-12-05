@@ -1,18 +1,18 @@
 .data {
-    width: 400px;
     display: flex;
-    /* justify-content: start; */
     background: rgba(0, 120, 201, 0.1);
     border-radius: 20px;
     margin-top: 10px;
 }
 
 .line {
-    width: 400px;
+    width: 300px;
     border-bottom: 1px solid pink;
     text-align: left;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding-left: 25px;
+    padding-right: 30px;
 }
 
 .src {

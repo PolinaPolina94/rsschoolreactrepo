@@ -7,18 +7,7 @@ import { UserSliceForm2 } from "../store/reducers/UserSliceForm2";
 import { useAppDispatch } from "../hooks/hooksforredux";
 import Autocomplete from "../AutocompleteSelect/Autocomplite";
 import { useState } from "react";
-
-type Inputs = {
-  name: string;
-  age: number;
-  email: string;
-  password1: string;
-  password2: string;
-  sex: string;
-  photo: object;
-  country: string;
-  checkbox: boolean;
-};
+import { Inputs } from "../utils/type";
 
 const schema = yup
   .object()
