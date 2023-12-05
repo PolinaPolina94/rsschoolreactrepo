@@ -10,15 +10,13 @@ function MainPage() {
         <div> Form App </div>
       </div>
       <div className={styles.containerform}>
-        <div>
+        <div className={styles.containervew}>
           <NavLink to={"/uncontrolled-form"}> Uncontrolled form </NavLink>
           <UncontroledFormData />
         </div>
-        <div>
-          <div>
-            <NavLink to={"/react-hook-form"}> React Hook Form </NavLink>
-            <ReactHookFormData />
-          </div>
+        <div className={styles.containervew}>
+          <NavLink to={"/react-hook-form"}> React Hook Form </NavLink>
+          <ReactHookFormData />
         </div>
       </div>
     </>

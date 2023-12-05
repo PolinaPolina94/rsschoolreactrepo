@@ -8,7 +8,7 @@ const ReactHookFormData = () => {
   if (name) {
     return (
       <div className={styles.data}>
-        <div>
+        <div className={styles.ramka}>
           <p className={styles.line}>
             Name is: <span className={styles.trade}> {name} </span>{" "}
           </p>
