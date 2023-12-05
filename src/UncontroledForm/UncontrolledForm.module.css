@@ -1,0 +1,109 @@
+.container {
+    width: 1000px;
+}
+
+.input {
+ width: 500px;
+ height: 30px;
+ border-radius: 10px;
+ border: 3px solid violet;
+ padding-left: 15px;
+}
+
+.inputcountry {
+ width: 500px;
+ height: 30px;
+ border-radius: 10px;
+ border: 3px solid violet;
+ padding-left: 15px
+}
+
+.inputpink {
+    width: 500px;
+    height: 30px;
+    border-radius: 10px;
+    border: 3px solid violet;
+    padding-left: 15px;
+    background-color: pink;
+}
+
+.inputyellow {
+    width: 500px;
+    height: 30px;
+    border-radius: 10px;
+    border: 3px solid violet;
+    padding-left: 15px;
+    background-color: #ffff9e;
+}
+
+.inputgreen {
+    width: 500px;
+    height: 30px;
+    border-radius: 10px;
+    border: 3px solid violet;
+    padding-left: 15px;
+    background-color: #b9ffb9;
+}
+
+.inputsex {
+  width: 20px;
+  margin-bottom: 15px;
+}
+
+.inputphoto {
+ border: none;
+ width: 500px;
+ height: 30px;
+}
+
+.inputagree {
+    width: 20px;
+}
+
+.inputsubmit {
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    border: 3px solid violet;
+    cursor: pointer;
+    padding: 0;
+}
+
+.inputwrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputwrapper1 {
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+    height: 35px;
+    margin-bottom: 20px;
+}
+
+.error {
+    width: 400px;
+    font-size: 14px;
+    color: green;
+    height: 25px;
+}
+
+.label {
+    margin-bottom: 10px;
+}
+
+.label1 {
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(33, 53, 71);
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none
+}
+
+.submit {
+    pointer-events: auto
+}
