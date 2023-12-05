@@ -5,7 +5,6 @@ const UncontroledFormData = () => {
   const { name, age, email, password1, sex, photo, countries } = useAppSelector(
     (state) => state.UserSliceForm1,
   );
-  console.log(name, age, email, password1, sex, photo, countries);
   if (name) {
     return (
       <div className={styles.data}>

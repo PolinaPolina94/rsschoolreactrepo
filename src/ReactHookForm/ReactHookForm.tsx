@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { UserSliceForm2 } from "../store/reducers/UserSliceForm2";
 import { useAppDispatch } from "../hooks/hooksforredux";
 import Autocomplete from "../AutocompleteSelect/Autocomplite";
+import { useState } from "react";
 
 type Inputs = {
   name: string;
@@ -114,6 +115,18 @@ function ReactHookForm() {
     mode: "onBlur",
   });
 
+  const [passwordLenght1, setPasswordLengh1] = useState(0);
+  const [passwordLenght2, setPasswordLengh2] = useState(0);
+
+  function showPassword1(value: string) {
+    console.log(value.length);
+    setPasswordLengh1(value.length);
+  }
+  function showPassword2(value: string) {
+    console.log(value.length);
+    setPasswordLengh2(value.length);
+  }
+
   const {
     username2,
     userage2,
@@ -221,11 +234,20 @@ function ReactHookForm() {
           <div className={styles.inputwrapper}>
             <label htmlFor="password1"></label>
             <input
-              className={styles.input}
+              className={
+                passwordLenght1 <= 1
+                  ? styles.input
+                  : passwordLenght1 <= 5
+                    ? styles.inputyellow
+                    : passwordLenght1 > 5
+                      ? styles.inputgreen
+                      : styles.input
+              }
               {...register("password1")}
               placeholder="password1"
               id="password1"
               name="password1"
+              onChange={(e) => showPassword1(e.currentTarget.value)}
             />
             <div className={styles.error}>
               {errors.password1 && <span> {errors.password1.message} </span>}
@@ -234,11 +256,20 @@ function ReactHookForm() {
           <div className={styles.inputwrapper}>
             <label htmlFor="password2"></label>
             <input
-              className={styles.input}
+              className={
+                passwordLenght2 <= 1
+                  ? styles.input
+                  : passwordLenght2 <= 5
+                    ? styles.inputyellow
+                    : passwordLenght2 > 5
+                      ? styles.inputgreen
+                      : styles.input
+              }
               {...register("password2")}
               id="password1"
               placeholder="password2"
               name="password2"
+              onChange={(e) => showPassword2(e.currentTarget.value)}
             />
             <div className={styles.error}>
               {errors.password2 && <span> {errors.password2.message} </span>}

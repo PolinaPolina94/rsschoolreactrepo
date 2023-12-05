@@ -66,6 +66,7 @@ function UncontrolledForm() {
       password1: yup
         .string()
         .required("This password1 field is required")
+        .test("len", "little password", (val) => val.toString().length < 5)
         .matches(
           /[\.:,;\?!@#\$%\^&\*_\-\+=]/,
           "The password must contain at least one special character ('.:,;?!@#$%^&*_-+=')!",
@@ -141,11 +142,19 @@ function UncontrolledForm() {
     country: "",
     checkbox: false,
   });
-
+  function showPassword1(value: string) {
+    setPasswordLengh1(value.length);
+  }
+  function showPassword2(value: string) {
+    setPasswordLengh2(value.length);
+  }
   function handleChange(key: string, val: string | number | boolean | object) {
     setUsertInfo({ ...userInfo, [key]: val });
     setbutton("submit");
   }
+  const [passwordLenght1, setPasswordLengh1] = useState(0);
+  const [passwordLenght2, setPasswordLengh2] = useState(0);
+
   function errorChange(key: ErrorMessages[], val: string | number | boolean) {
     setErrorName({ ...errorName, [key as unknown as string]: val });
   }
@@ -247,22 +256,44 @@ function UncontrolledForm() {
           <div className={styles.inputwrapper}>
             <label htmlFor="password"></label>
             <input
-              className={styles.input}
+              className={
+                passwordLenght1 <= 1
+                  ? styles.input
+                  : passwordLenght1 <= 5
+                    ? styles.inputyellow
+                    : passwordLenght1 > 5
+                      ? styles.inputgreen
+                      : styles.input
+              }
               placeholder="password1"
               id="password1"
               value={userInfo.password1}
-              onChange={(e) => handleChange("password1", e.currentTarget.value)}
+              onChange={(e) => {
+                handleChange("password1", e.currentTarget.value);
+                showPassword1(e.currentTarget.value);
+              }}
             />
             <div className={styles.error}>{errorName.password1}</div>
           </div>
           <div className={styles.inputwrapper}>
             <label htmlFor="password"></label>
             <input
-              className={styles.input}
+              className={
+                passwordLenght2 <= 1
+                  ? styles.input
+                  : passwordLenght2 <= 5
+                    ? styles.inputyellow
+                    : passwordLenght2 > 5
+                      ? styles.inputgreen
+                      : styles.input
+              }
               placeholder="password2"
               id="password2"
               value={userInfo.password2}
-              onChange={(e) => handleChange("password2", e.currentTarget.value)}
+              onChange={(e) => {
+                handleChange("password2", e.currentTarget.value);
+                showPassword2(e.currentTarget.value);
+              }}
             />
             <div className={styles.error}>{errorName.password2}</div>
           </div>
